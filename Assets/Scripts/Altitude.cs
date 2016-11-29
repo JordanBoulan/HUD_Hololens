@@ -24,7 +24,7 @@ public class Altitude : MonoBehaviour
             altitude = 10f;
         }
         SetAltitudeBar(altitude);
-        AltitudeTextMoving.text = altitude.ToString();
+        AltitudeTextMoving.text = altitude.ToString() + " m";
     }
 
     public void SetAltitudeBar(float myAltitude)
