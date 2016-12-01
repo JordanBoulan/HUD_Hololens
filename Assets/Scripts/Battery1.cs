@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class Battery1 : MonoBehaviour {
 
-    public static int xVal=100;
-    public Color color;
+    public static int xVal = 100; //x vallue of image size
+    public Color color; //set color to the battery
     public static int count = 0;
     private UnityEngine.UI.RawImage battery;
     public Text BatteryText;
