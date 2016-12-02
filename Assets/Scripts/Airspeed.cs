@@ -24,7 +24,7 @@ public class Airspeed : MonoBehaviour {
             airspeed = 30f;
         }
         SetAirspeedBar(airspeed);
-        AirspeedTextMoving.text = airspeed.ToString();
+        AirspeedTextMoving.text = airspeed.ToString() + " kph";
     }
 
     public void SetAirspeedBar(float myAirspeed)

@@ -7,6 +7,7 @@ using System.IO;
 #if !UNITY_EDITOR
     using Windows.Networking.Sockets;
     using Windows.Networking;
+    using Newtonsoft.Json.Serialization;
 #endif
 
 public class Connection : MonoBehaviour
@@ -27,7 +28,7 @@ public class Connection : MonoBehaviour
     {
 #endif
 
-            Debug.Log("I am Alive!!");
+    
 
 #if !UNITY_EDITOR
             Debug.Log("Waiting for a connection...");
@@ -63,13 +64,27 @@ public class Connection : MonoBehaviour
         private async void Socket_MessageReceived(Windows.Networking.Sockets.DatagramSocket sender,
             Windows.Networking.Sockets.DatagramSocketMessageReceivedEventArgs args)
         {
+
+        try
+        {
             //Read the message that was received from the UDP echo client.
             Stream streamIn = args.GetDataStream().AsStreamForRead();
             StreamReader reader = new StreamReader(streamIn);
-           // string message = await reader.ReadLineAsync();
+            // string message = await reader.ReadLineAsync();
             string myMessage = await reader.ReadToEndAsync();
             Debug.Log("MESSAGE: " + myMessage);
             UnityEngine.Debug.LogError(myMessage);
+
+            DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(myMessage);
+            UdpEvent.onDataRecieved(newData);
+        }
+
+        catch (Exception e)
+        {
+            Exception mye = e;
+            String tst = mye.Message;
+            string sts = "";
+        }
         }
 #endif
 }
