@@ -9,23 +9,18 @@ public class Altitude : MonoBehaviour
     public Text AltitudeTextMoving;
     public GameObject altitudeBar;
 
+    private void myDataUpdater(DataStruct newData)
+    {
+        altitude = (float) newData.altitudeData;
+    }
+
     // Use this for initialization
     void Start()
     {
-        AltitudeTextMoving.text = altitude.ToString();
-        InvokeRepeating("ReduceAltitude", 0f, 0.5f);
+        UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(myDataUpdater);
     }
 
-    void ReduceAltitude()
-    {
-        altitude -= 1f;
-        if (altitude < 0f)
-        {
-            altitude = 10f;
-        }
-        SetAltitudeBar(altitude);
-        AltitudeTextMoving.text = altitude.ToString() + " m";
-    }
+   
 
     public void SetAltitudeBar(float myAltitude)
     {
@@ -46,6 +41,7 @@ public class Altitude : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        SetAltitudeBar(altitude);
+        AltitudeTextMoving.text = altitude.ToString() + " m";
     }
 }

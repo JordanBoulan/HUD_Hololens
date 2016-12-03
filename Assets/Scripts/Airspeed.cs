@@ -10,22 +10,17 @@ public class Airspeed : MonoBehaviour {
     public GameObject airspeedBar;
 
     // Use this for initialization
-    void Start()
+    private void dataUpdater(DataStruct newData)
     {
-        AirspeedTextMoving.text = airspeed.ToString();
-        InvokeRepeating("ReduceAirspeed", 0f, 0.2f);
+        airspeed = (float) newData.speedData;
     }
 
-    void ReduceAirspeed()
+    void Start()
     {
-        airspeed -= 1f;
-        if (airspeed < 0f)
-        {
-            airspeed = 30f;
-        }
-        SetAirspeedBar(airspeed);
-        AirspeedTextMoving.text = airspeed.ToString() + " kph";
+        UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataUpdater);
     }
+
+
 
     public void SetAirspeedBar(float myAirspeed)
     {
@@ -46,6 +41,7 @@ public class Airspeed : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        SetAirspeedBar(airspeed);
+        AirspeedTextMoving.text = airspeed.ToString() + " kph";
     }
 }

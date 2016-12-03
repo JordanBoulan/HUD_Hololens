@@ -14,6 +14,7 @@ public class Connection : MonoBehaviour
 {
 #if !UNITY_EDITOR
         DatagramSocket socket;
+        string listenPort = "5005";
 
 
 
@@ -39,8 +40,7 @@ public class Connection : MonoBehaviour
 
             try
             {
-            //await socket.BindServiceNameAsync("5005");
-            await socket.BindEndpointAsync(null, "5005");
+            await socket.BindEndpointAsync(null, listenPort);
                 
             }
             catch (Exception e)
@@ -70,13 +70,12 @@ public class Connection : MonoBehaviour
             //Read the message that was received from the UDP echo client.
             Stream streamIn = args.GetDataStream().AsStreamForRead();
             StreamReader reader = new StreamReader(streamIn);
-            // string message = await reader.ReadLineAsync();
-            string myMessage = await reader.ReadToEndAsync();
-            Debug.Log("MESSAGE: " + myMessage);
-            UnityEngine.Debug.LogError(myMessage);
+            string jsonData = await reader.ReadToEndAsync();
+            //Debug.Log("MESSAGE: " + jsonData);
+            //UnityEngine.Debug.LogError(jsonData);
 
-            DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(myMessage);
-            UdpEvent.onDataRecieved(newData);
+              DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(jsonData);
+              UdpEvent.onDataRecieved(newData);
         }
 
         catch (Exception e)

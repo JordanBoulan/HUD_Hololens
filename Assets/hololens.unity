@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692534, g: 0.49678725, b: 0.5750856, a: 1}
+  m_IndirectSpecularColor: {r: 0.38653377, g: 0.4199665, b: 0.48573393, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1338,7 +1338,6 @@ GameObject:
   - 114: {fileID: 527159843}
   - 114: {fileID: 527159842}
   - 114: {fileID: 527159841}
-  - 114: {fileID: 527159845}
   m_Layer: 5
   m_Name: Temperature
   m_TagString: Untagged
@@ -1423,18 +1422,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 527159839}
---- !u!114 &527159845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 527159839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b3eb0969625194a8226402ce2a08e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zVal: 0
 --- !u!1 &615162613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,7 +2074,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3040,7 +3027,6 @@ GameObject:
   - 224: {fileID: 1380293332}
   - 222: {fileID: 1380293335}
   - 114: {fileID: 1380293334}
-  - 114: {fileID: 1380293333}
   - 114: {fileID: 1380293337}
   - 114: {fileID: 1380293336}
   m_Layer: 5
@@ -3068,19 +3054,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1619.1, y: -0.00021362305}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &1380293333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1380293331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f24b32f5af7b13e4fb07fdf8152bcf8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
-  BatteryText: {fileID: 0}
 --- !u!114 &1380293334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3739,7 +3712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 0.7
+  m_ScaleFactor: 0.5
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -4048,6 +4021,7 @@ GameObject:
   - 114: {fileID: 1727920291}
   - 114: {fileID: 1727920290}
   - 114: {fileID: 1727920289}
+  - 114: {fileID: 1727920293}
   m_Layer: 5
   m_Name: Battery
   m_TagString: Untagged
@@ -4138,6 +4112,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1727920287}
+--- !u!114 &1727920293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1727920287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61f8b44febbbce4fb0422977d7a46bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1749026084
 GameObject:
   m_ObjectHideFlags: 0
@@ -4150,7 +4136,6 @@ GameObject:
   - 114: {fileID: 1749026088}
   - 114: {fileID: 1749026087}
   - 114: {fileID: 1749026086}
-  - 114: {fileID: 1749026090}
   m_Layer: 5
   m_Name: HorizonLine
   m_TagString: Untagged
@@ -4235,18 +4220,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1749026084}
---- !u!114 &1749026090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1749026084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b3eb0969625194a8226402ce2a08e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zVal: 0
 --- !u!1 &1791373795
 GameObject:
   m_ObjectHideFlags: 0
@@ -5017,7 +4990,6 @@ GameObject:
   - 224: {fileID: 2139627437}
   - 222: {fileID: 2139627439}
   - 114: {fileID: 2139627438}
-  - 114: {fileID: 2139627440}
   m_Layer: 5
   m_Name: BatteryText
   m_TagString: Untagged
@@ -5082,14 +5054,3 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2139627436}
---- !u!114 &2139627440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2139627436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 756a3adaedaad12458415694c30d047d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
