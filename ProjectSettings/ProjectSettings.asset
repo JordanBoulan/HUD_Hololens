@@ -353,7 +353,7 @@ PlayerSettings:
   metroCertificateNotAfter: 80bb9014f76bd301
   metroApplicationDescription: HUDforHololens
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: HUDforHololens
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0
@@ -371,15 +371,15 @@ PlayerSettings:
       BlockedChatMessages: False
       Bluetooth: False
       Chat: False
-      CodeGeneration: False
+      CodeGeneration: True
       EnterpriseAuthentication: False
-      HumanInterfaceDevice: False
+      HumanInterfaceDevice: True
       InternetClient: True
       InternetClientServer: True
       Location: False
       Microphone: True
       MusicLibrary: False
-      Objects3D: False
+      Objects3D: True
       PhoneCall: False
       PicturesLibrary: False
       PrivateNetworkClientServer: True
@@ -462,7 +462,7 @@ PlayerSettings:
   - iOS::VR::enable
   - tvOS::VR::enable
   Android::VR::enable: 0
-  Metro::VR::enable: 0
+  Metro::VR::enable: 1
   N3DS::VR::enable: 0
   PS3::VR::enable: 0
   PS4::VR::enable: 0
