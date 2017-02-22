@@ -7,7 +7,7 @@ public class Battery : MonoBehaviour {
 
     public static int xVal; //x vallue of image size
     public Color color; //set color to the battery
-    private GameObject battery;
+    private Image battery;
     private Text text;
 
     
@@ -19,7 +19,8 @@ public class Battery : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {
-        battery = GameObject.Find("batteryAnimation");
+        battery = GameObject.Find("batteryAnimation").GetComponent<Image>();
+        battery.fillAmount = 0f;
         text = GameObject.Find("BatteryText").GetComponent<Text>();
         UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
     }
@@ -29,7 +30,7 @@ public class Battery : MonoBehaviour {
     {
 
 
-        battery.GetComponent<RectTransform>().sizeDelta = new Vector2(xVal, 100);
+        battery.fillAmount = xVal / 100;
 
         text.text = xVal + "%";
 

@@ -13,10 +13,10 @@ public class Altitude1 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        altitudeBar = GameObject.Find("AltitudeBar").GetComponent<Image>();
+        altitudeBar = GameObject.Find("AltitudeBarFill").GetComponent<Image>();
         altitudeBar.fillAmount = 0f;
         
-        AltitudeTextMoving = GameObject.Find("AltitudeTextMoving").GetComponent<Text>();
+        AltitudeTextMoving = GameObject.Find("AltitudeText").GetComponent<Text>();
         AltitudeTextMoving.text = altitude.ToString();
         InvokeRepeating("ReduceAltitude", 0f, 0.5f);
     }
