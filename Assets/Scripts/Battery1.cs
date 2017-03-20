@@ -9,24 +9,26 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-public class Battery1 : MonoBehaviour {
+public class Battery1 : MonoBehaviour
+{
 
     public static float xVal = 100f;//value of the width of the image
     public Color color;//color of the image
     public static int count = 0;
     private Image battery;
-    
+
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         battery = GetComponent<Image>();
         battery.fillAmount = 0f;
 
 
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
 
         battery.fillAmount = xVal / 100;
@@ -43,20 +45,24 @@ public class Battery1 : MonoBehaviour {
                 xVal = 100;
             }
         }
-        
-        if (xVal >= 0 && xVal <= 10)
+
+        if (xVal >= 0 && xVal <= 30)
         {
             GetComponent<Image>().color = new Color32(255, 0, 0, 255); //red
+            Warnings.setWarning("Warning: Battery will die soon!");
+
         }
-        else if (xVal > 10 && xVal <= 25)
+        else if (xVal > 30 && xVal <= 50)
         {
             GetComponent<Image>().color = new Color32(251, 255, 0, 255);//yellow
+            Warnings.setWarning("Warning: Battery is getting low");
         }
-        else if (xVal>25 && xVal<=100)
+        else if (xVal > 50 && xVal <= 100)
         {
             GetComponent<Image>().color = new Color32(33, 255, 47, 255);//green
+            Warnings.clearWarning();
+
         }
-        
+
     }
-    
 }
