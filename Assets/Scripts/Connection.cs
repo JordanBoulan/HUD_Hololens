@@ -3,18 +3,21 @@ using System.Collections;
 using System;
 using System.IO;
 
-/*
-Author: Jordan Boulanger
-UDP Connection initilization and listener. Fires a C# event (udpEvent) 
-when it recieves data
- */ 
-
-
 #if !UNITY_EDITOR
-    using Windows.Networking.Sockets;
+using Windows.Networking.Sockets;
     using Windows.Networking;
- //   using Newtonsoft.Json.Serialization;
+    using Newtonsoft.Json.Serialization;
 #endif
+
+/// <summary>
+/// File: Connection.cs \n
+/// Author: Jordan Boulanger \n
+/// Creation date: \n
+/// Date Last Modified: 1/26/2017 \n
+/// Description: UDP Connection initilization and listener. Fires a C# event (udpEvent) 
+/// when it recieves data.
+/// </summary>
+/// 
 
 public class Connection : MonoBehaviour
 {
@@ -76,19 +79,16 @@ public class Connection : MonoBehaviour
             //Read the message that was received from the UDP echo client.
             Stream streamIn = args.GetDataStream().AsStreamForRead();
             StreamReader reader = new StreamReader(streamIn);
-   //         string jsonData = await reader.ReadToEndAsync();
-            //Debug.Log("MESSAGE: " + jsonData);
-            //UnityEngine.Debug.LogError(jsonData);
 
-     //       DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(jsonData);
-            //UdpEvent.onDataRecieved(newData);
+            string jsonData = await reader.ReadToEndAsync();
+            DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(jsonData);
+            UdpEvent.onDataRecieved(newData);
         }
 
         catch (Exception e)
         {
             Exception mye = e;
-            String tst = mye.Message;
-            string sts = "";
+            
         }
         }
 #endif

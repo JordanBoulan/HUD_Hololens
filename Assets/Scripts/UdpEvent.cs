@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//UDPEvent.cs
+
+using UnityEngine;
 using System.Collections;
 using System;
 using System.IO;
