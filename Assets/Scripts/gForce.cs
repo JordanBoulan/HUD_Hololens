@@ -17,7 +17,7 @@ public class gForce : MonoBehaviour
 {
 
     public float theta;
-    public float asd;
+    public float gForceVal;
     ///Set value for each component to 100
     public float gForce1 = 100f;
     ///Use for the brake textbox in Unity
@@ -30,7 +30,7 @@ public class gForce : MonoBehaviour
     public Text accelText;
     ///Used to delay the loop of text animation.
     public static int count = 0;
-
+    //Use to get image from Unity
     public Image gforceImage;
 
     //radius of circle ~6.38
@@ -40,7 +40,7 @@ public class gForce : MonoBehaviour
 
     public void dataListener(DataStruct newData)
     {
-        //theta = (int)newData.gforce;
+        //gForceVal = (int)newData.gforce;
         //theta = (int)newData.gforceAngle;
     }
 
@@ -68,12 +68,12 @@ public class gForce : MonoBehaviour
     void Update()
     {
         float xPos = 1.710022f;
-        //x = data*cos(theta)
-        //y = data*sin(theta)
         float yPos = -0.3299866f;
+        //x = gForceVal*cos(theta)
+        //y = gForceVal*sin(theta)
 
-        gforceImage.transform.localPosition = new Vector3(xPos, yPos, 0);
-        //gforceImage.transform.localPosition = UnityEngine.Random.insideUnitCircle * 5;
+        //gforceImage.transform.localPosition = new Vector3(xPos, yPos, 0);
+        gforceImage.transform.localPosition = UnityEngine.Random.insideUnitCircle * 4;
         count++;
         if (count == 20)
         {

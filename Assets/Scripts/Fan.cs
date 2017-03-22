@@ -80,7 +80,7 @@ public class Fan : MonoBehaviour
         count++;
         if (count == 20)
         {
-            fanPercentage = fanPercentage - 200; //decrement the width of image
+            fanPercentage = fanPercentage - 500; //decrement the width of image
             count = 0;
             //reset battery to 100 when it gets to 0 (value doesnt go negative)
             if (fanPercentage < 0)
