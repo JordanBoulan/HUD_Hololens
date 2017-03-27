@@ -67,13 +67,13 @@ public class gForce : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xPos = 1.710022f;
-        float yPos = -0.3299866f;
+        float xPos = 0;
+        float yPos = 0;
         //x = gForceVal*cos(theta)
         //y = gForceVal*sin(theta)
 
-        //gforceImage.transform.localPosition = new Vector3(xPos, yPos, 0);
-        gforceImage.transform.localPosition = UnityEngine.Random.insideUnitCircle * 4;
+        gforceImage.transform.localPosition = new Vector3(0, 0, 0);
+        //gforceImage.transform.localPosition = UnityEngine.Random.insideUnitCircle * 4;
         count++;
         if (count == 20)
         {
