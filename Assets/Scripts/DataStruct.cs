@@ -29,21 +29,7 @@ public class DataStruct : MonoBehaviour
     ///get values for fan
     public double fandata { get; set; }
     ///get values for gforce
-    public double gforce { get; set; }
-    ///get values for gforceAngle
-    public double gforceAngle { get; set; }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public float[] gforceData { get; set; }
 
 }
 

@@ -6,7 +6,7 @@ using System.IO;
 #if !UNITY_EDITOR
 using Windows.Networking.Sockets;
     using Windows.Networking;
-    using Newtonsoft.Json.Serialization;
+    //using Newtonsoft.Json.Serialization;
 #endif
 
 /// <summary>
@@ -21,75 +21,69 @@ using Windows.Networking.Sockets;
 
 public class Connection : MonoBehaviour
 {
-#if !UNITY_EDITOR
-        DatagramSocket socket;
-        string listenPort = "5005";
+    #if !UNITY_EDITOR
+            DatagramSocket socket;
+            string listenPort = "5005";
 
 
 
-#endif
-    // use this for initialization
-#if !UNITY_EDITOR
-    async void Start()
-    {
-#endif
-#if UNITY_EDITOR
-    void Start()
-    {
-#endif
+    #endif
+        // use this for initialization
+    #if !UNITY_EDITOR
+        async void Start()
+        {
+    #endif
+    #if UNITY_EDITOR
+        void Start()
+        {
+    #endif
 
     
 
-#if !UNITY_EDITOR
-            Debug.Log("Waiting for a connection...");
+    #if !UNITY_EDITOR
+                Debug.Log("Waiting for a connection...");
 
-            socket = new DatagramSocket();
-            socket.MessageReceived += Socket_MessageReceived;
+                socket = new DatagramSocket();
+                socket.MessageReceived += Socket_MessageReceived;
        
 
-            try
-            {
-            await socket.BindEndpointAsync(null, listenPort);
+                try
+                {
+                await socket.BindEndpointAsync(null, listenPort);
                 
-            }
-            catch (Exception e)
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.ToString());
+                    Debug.Log(SocketError.GetStatus(e.HResult).ToString());
+                    return;
+                }
+
+                Debug.Log("exit start");
+    #endif
+        }
+
+    #if !UNITY_EDITOR
+            private async void Socket_MessageReceived(Windows.Networking.Sockets.DatagramSocket sender,
+                Windows.Networking.Sockets.DatagramSocketMessageReceivedEventArgs args)
             {
-                Debug.Log(e.ToString());
-                Debug.Log(SocketError.GetStatus(e.HResult).ToString());
-                return;
-            }
 
-            Debug.Log("exit start");
-#endif
-    }
+                try
+                {
+                    //Read the message that was received from the UDP echo client.
+                    Stream streamIn = args.GetDataStream().AsStreamForRead();
+                    StreamReader reader = new StreamReader(streamIn);
 
-    // Update is called once per frame
-    void Update()
-    {
+                    //string jsonData = await reader.ReadToEndAsync();
+                    //DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(jsonData);
+                    //UdpEvent.onDataRecieved(newData);
+                }
 
-    }
-
-#if !UNITY_EDITOR
-        private async void Socket_MessageReceived(Windows.Networking.Sockets.DatagramSocket sender,
-            Windows.Networking.Sockets.DatagramSocketMessageReceivedEventArgs args)
-        {
-
-        try
-        {
-            //Read the message that was received from the UDP echo client.
-            Stream streamIn = args.GetDataStream().AsStreamForRead();
-            StreamReader reader = new StreamReader(streamIn);
-
-            string jsonData = await reader.ReadToEndAsync();
-            DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(jsonData);
-            UdpEvent.onDataRecieved(newData);
-        }
-
-        catch (Exception e)
-        {
-            Exception mye = e;
+                catch (Exception e)
+                {
+                    Exception mye = e;
             
-        }
-        }
-#endif
+                }
+            }
+    #endif
 }

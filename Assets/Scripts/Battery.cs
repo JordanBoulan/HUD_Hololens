@@ -16,7 +16,7 @@ using System;
 public class Battery : MonoBehaviour
 {
     ///Set the battery percentage to 100 (max).
-    public float batteryPercentage = 100f;
+    public float batteryPercentage;
     ///Representation of the RGBA color space.
     public Color color;
     ///Used to locate the battery image that will be animated based on the percentage.
@@ -37,7 +37,7 @@ public class Battery : MonoBehaviour
     public void Start()
     {
         //get value from data receiver
-        //UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
+        UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
 
         //find the battery image component in Unity and set the value to zero.
         battery = GameObject.Find("batteryAnimation").GetComponent<Image>();
@@ -94,7 +94,7 @@ public class Battery : MonoBehaviour
     public void Update()
     {	
         battery.fillAmount = (float)batteryPercentage / 100; //get battery value from listener, convert to a percentage (x/100)
-        reduceBattery(); //calls reduce battery function to show simple animation
+        //reduceBattery(); //calls reduce battery function to show simple animation
         text.text = batteryPercentage + "%"; //show the battery value as text in the display
         changeColor(); //calls the change color function.
     }

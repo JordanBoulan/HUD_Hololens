@@ -17,7 +17,7 @@ public class Altitude : MonoBehaviour
     ///Set the maximum value of the altitude.
     public static float maxAltitude = 10f;
     ///The airspeed property sets the value of the current altitude. This value will change depending on the user's height.
-    public static float altitude = 10f;
+    public static float altitude;
     ///The altitude text locates the textbox in unity.
     private Text altitudeText;
     ///The altitude bar image locates the image in unity to be animated.
@@ -34,7 +34,7 @@ public class Altitude : MonoBehaviour
     void Start()
     {
         //gets values from data generator
-        //UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(myDataUpdater);
+        UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(myDataUpdater);
 
         //find the altitude bar component in unity, and set it to zero.
         altitudeBar = GameObject.Find("AltitudeBarFill").GetComponent<Image>();
@@ -45,7 +45,9 @@ public class Altitude : MonoBehaviour
         altitudeText.text = altitude.ToString();
 
         //loop that will reduce the altitude value over time. comment out this line to use the data reciever above.
-        InvokeRepeating("ReduceAltitude", 0f, 0.5f);
+        //InvokeRepeating("ReduceAltitude", 0f, 0.5f);
+        SetAltitudeBar(altitude);
+        altitudeText.text = altitude.ToString();
     }
 
     /// A simple loop to show a simple animation of the altitude graphic
@@ -61,8 +63,7 @@ public class Altitude : MonoBehaviour
         {
             altitude = 10f;
         }
-        SetAltitudeBar(altitude);
-        altitudeText.text = altitude.ToString();
+        
     }
 
     /// Sets the airspeed value to the airspeed bar in the heads up display.

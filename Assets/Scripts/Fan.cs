@@ -16,7 +16,7 @@ using System;
 public class Fan : MonoBehaviour
 {
     ///Set the fan percentage to 100 (max).
-    public float fanPercentage = 10000f;
+    public float fanPercentage;
     ///Representation of the RGBA color space.
     public Color color;
     ///Used to locate the battery image that will be animated based on the percentage.
@@ -28,16 +28,16 @@ public class Fan : MonoBehaviour
 
     /// Gets the battery value from the data listener
     /// <param name="newData"></param>
-    //public void dataListener(DataStruct newData)
-    //{
-    //    fanPercentage = (int)newData.fandata;
-    //}
+    public void dataListener(DataStruct newData)
+    {
+        fanPercentage = (int)newData.fandata;
+    }
 
     /// Locates and grabs the image and text components from the Unity project for the battery bar and textbox
     public void Start()
     {
         //get value from data receiver
-        //UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
+        UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
 
         //find the battery image component in Unity and set the value to zero.
         fan = GameObject.Find("FanFill").GetComponent<Image>();
@@ -60,6 +60,11 @@ public class Fan : MonoBehaviour
             text.GetComponent<Text>().color = new Color32(255, 0, 0, 255);
         }
         //set color of text and image to yellow if battery percentage is between 10 and 25
+        else if (fanPercentage > 1500 && fanPercentage <= 3000)
+        {
+            fan.GetComponent<Image>().color = new Color32(251, 255, 0, 255);
+            text.GetComponent<Text>().color = new Color32(251, 255, 0, 255);
+        }
         else if (fanPercentage > 1500 && fanPercentage <= 3000)
         {
             fan.GetComponent<Image>().color = new Color32(251, 255, 0, 255);
@@ -94,7 +99,7 @@ public class Fan : MonoBehaviour
     public void Update()
     {
         fan.fillAmount = (float)fanPercentage / 10000; //get battery value from listener, convert to a percentage (x/100)
-        reduceFan(); //calls reduce battery function to show simple animation
+        //reduceFan(); //calls reduce battery function to show simple animation
         text.text = fanPercentage + " "; //show the battery value as text in the display
         changeColor(); //calls the change color function.
     }

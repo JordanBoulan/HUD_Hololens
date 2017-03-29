@@ -1,4 +1,4 @@
-﻿//gForce.cs
+//gForce.cs
 
 using UnityEngine;
 using System.Collections;
@@ -13,13 +13,22 @@ using System;
 /// Description: 
 /// </summary>
 
+struct gForceValues
+{
+	public float brake;
+	public float accel;
+	public float left;		
+	public float right;
+		
+};
+	
 public class gForce : MonoBehaviour
 {
 
     public float theta;
     public float gForceVal;
     ///Set value for each component to 100
-    public float gForce1 = 100f;
+    //public float gForce1 = 100f;
     ///Use for the brake textbox in Unity
     public Text brakeText;
     ///Use for the right textbox in Unity
@@ -31,25 +40,61 @@ public class gForce : MonoBehaviour
     ///Used to delay the loop of text animation.
     public static int count = 0;
     //Use to get image from Unity
-    public Image gforceImage;
+    public RawImage gforceImage;
 
     //radius of circle ~6.38
-
-
-
+	
+	gForceValues gForce1;
+    private float[] gForceData;
 
     public void dataListener(DataStruct newData)
     {
-        //gForceVal = (int)newData.gforce;
-        //theta = (int)newData.gforceAngle;
+		gForceData = newData.gforceData;
+        theta = gForceData[0];
+		gForceVal = gForceData[1];
     }
+	
+	public void calculateGforce(float gForceVal, float theta)
+	{
+        float gForceX = gForceVal * (float)Math.Cos(theta);
+        float gForceY = gForceVal * (float)Math.Sin(theta);
+		if (theta < 90 && theta >= 0)
+		{
+            gForce1.brake = gForceY;
+            gForce1.accel = 0;
+            gForce1.left = 0;
+            gForce1.accel = gForceX;
+		}
+		if (theta >= 90 && theta < 180)
+		{
+            gForce1.brake = gForceY;
+            gForce1.accel = 0;
+            gForce1.left = gForceX;
+            gForce1.right = 0;
+		}
+		if (theta >= 180 && theta < 270)
+		{
+            gForce1.brake = 0;
+            gForce1.accel = gForceY;
+            gForce1.left = gForceX;
+            gForce1.right = 0;
+		}
+		if (theta >= 270 && theta <= 360)
+		{
+            gForce1.brake = 0;
+            gForce1.accel = gForceY;
+            gForce1.left = 0;
+            gForce1.right = gForceX;
+		}
+		
+	}
 
 
     // Use this for initialization
     void Start()
     {
         //get value from data generator
-        //UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
+        UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
 
         //brake text
         brakeText = GameObject.Find("BrakeText").GetComponent<Text>();
@@ -61,7 +106,7 @@ public class gForce : MonoBehaviour
         accelText = GameObject.Find("AccelText").GetComponent<Text>();
 
         //image
-        gforceImage = GameObject.Find("gforceImage").GetComponent<Image>();
+        gforceImage = GameObject.Find("gforceImage").GetComponent<RawImage>();
     }
 
     // Update is called once per frame
@@ -69,11 +114,17 @@ public class gForce : MonoBehaviour
     {
         float xPos = 0;
         float yPos = 0;
-        //x = gForceVal*cos(theta)
-        //y = gForceVal*sin(theta)
+        
+        if (gForceVal != 0) { 
+            xPos = gForceVal * (float)Math.Cos(theta);
+            yPos = gForceVal * (float)Math.Sin(theta);
+            }
+        
 
-        gforceImage.transform.localPosition = new Vector3(0, 0, 0);
-        //gforceImage.transform.localPosition = UnityEngine.Random.insideUnitCircle * 4;
+        gforceImage.transform.localPosition = new Vector3(xPos, yPos, 0);
+		calculateGforce(gForceVal, theta);
+        /*
+		gforceImage.transform.localPosition = UnityEngine.Random.insideUnitCircle * 4;
         count++;
         if (count == 20)
         {
@@ -84,18 +135,17 @@ public class gForce : MonoBehaviour
             {
                 gForce1 = 100;
             }
-        }
+        }*/
 
         //set values to textbox in Unity
-        brakeText.text = gForce1+ "";
-        rightText.text = gForce1 + "";
-        leftText.text = gForce1 + "";
-        accelText.text = gForce1 + "";
+        Debug.Log(gForce1.brake);
+        brakeText.text = gForce1.brake + "";
+        rightText.text = gForce1.right + "";
+        leftText.text  = gForce1.left  + "";
+        accelText.text = gForce1.accel + "";
 
 
 
 
     }
-
-
 }

@@ -17,7 +17,7 @@ public class Airspeed : MonoBehaviour
     ///Set the maximum value of the airspeed.
     public float maxAirspeed = 30f;
     ///The airspeed property sets the value of the current airspeed. This value will change depending on the user's speed.
-    public float airspeed = 30f;
+    public float airspeed;
     ///The airspeed text locates the textbox in unity.
     private Text airspeedText;
     ///The airspeed bar image locates the image in unity to be animated.
@@ -34,7 +34,7 @@ public class Airspeed : MonoBehaviour
     void Start()
     {
         //get values from data generator
-        //UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataUpdater);
+        UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataUpdater);
 
         //find the airspeed bar component in unity, and set it to zero.
         airspeedBar = GameObject.Find("AirspeedBarFill").GetComponent<Image>();
@@ -45,7 +45,9 @@ public class Airspeed : MonoBehaviour
         airspeedText.text = airspeed.ToString();
 
         //loop that will reduce the airspeed value over time. comment out this line to use the data reciever above.
-        InvokeRepeating("ReduceAirspeed", 0f, 0.2f);
+        //InvokeRepeating("ReduceAirspeed", 0f, 0.2f);
+        SetAirspeedBar(airspeed);
+        airspeedText.text = airspeed.ToString();
     }
 
     /// A simple loop to show a simple animation of the airspeed graphic
@@ -61,8 +63,7 @@ public class Airspeed : MonoBehaviour
         {
             airspeed = 30f;
         }
-        SetAirspeedBar(airspeed);
-        airspeedText.text = airspeed.ToString();
+        
     }
 
     /// Sets the airspeed value to the airspeed bar in the heads up display.

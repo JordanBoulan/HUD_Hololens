@@ -18,7 +18,7 @@ using System;
 public class Temperature : MonoBehaviour
 {
     ///Set the temperature value to 0.
-    public static float TemperaturePercentage = 0f; //x value of image size
+    public static float TemperaturePercentage; //x value of image size
     ///Used to locate the temperature image in Unity to be animated.
     public Image temperature;
     ///Used to locate the textbox in Unity.
@@ -30,14 +30,14 @@ public class Temperature : MonoBehaviour
     /// <param name="newData"></param>
     public void dataListener(DataStruct newData)
     {
-		TemperaturePercentage = (int)newData.batteryData;
+		TemperaturePercentage = (int)newData.tempData;
     }
 
     // Use this for initialization
     public void Start()
     {
         //get value from data generator
-        //UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
+        UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataListener);
 
         //find the temperature image component in Unity and set the value to zero.
         temperature = GameObject.Find("TemperatureFill").GetComponent<Image>();
@@ -53,7 +53,7 @@ public class Temperature : MonoBehaviour
         count++;
         if (count == 10)
         {
-            TemperaturePercentage = TemperaturePercentage + 3; //increase temperature
+            TemperaturePercentage = TemperaturePercentage + 2; //increase temperature
             count = 0;
             //reset battery to 100 when it gets to 0 (value doesnt go negative)
             if (TemperaturePercentage > 100)
@@ -67,7 +67,7 @@ public class Temperature : MonoBehaviour
     public void Update()
     {
         temperature.fillAmount = (float)TemperaturePercentage / 100; //get battery value from listener, convert to a percentage (x/100)
-        increaseTemp(); //calls function to animate
+        //increaseTemp(); //calls function to animate
         tempText.text = TemperaturePercentage.ToString(); //show the temperature value as text in the display
 
     }

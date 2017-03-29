@@ -37,18 +37,4 @@ public class UdpEvent : MonoBehaviour
 		newData.altitude = myLocalalitude
 	}
 	*/
-
-
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
