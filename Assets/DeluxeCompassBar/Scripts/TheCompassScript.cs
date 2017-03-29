@@ -18,8 +18,9 @@ using UnityEngine.UI;
 //
 public class TheCompassScript : MonoBehaviour {
 
-	// You can replace these textures with your own graphics in the Inspector
-	[Tooltip("The main Compass GUI graphic")]
+    // You can replace these textures with your own graphics in the Inspector
+    [Tooltip("The main Compass GUI graphic")]
+    public GameObject myCanvas;
 	public Sprite compassGUIBackground;
 	[Tooltip("Turn Bookend graphic On and Off")]
 	public bool drawCompassBookends = true;
@@ -144,8 +145,8 @@ public class TheCompassScript : MonoBehaviour {
 
 		// If this error occurs, you probably broke the prefab, as it's missing some required elements
 		if(!compassMarkerContainer || !compassCanvasParent || !compassBackground || !compassBackgroundMask || !compassTicksRect || !northLabel || !southLabel || !eastLabel || !westLabel || !compassBookendLeft || !compassBookendRight){
-			Debug.LogError("TheCompassScript:: Could not find one or more of the child UI Canvas elements of The Compass. Did you break the Prefab?");
-		}
+          // Debug.LogError("TheCompassScript:: Could not find one or more of the child UI Canvas elements of The Compass. Did you break the Prefab?");
+        }
 
 		// Compass Camera will be used to calculate where our compass is.
 		// We don't make The Compass direct child of player because it can cause subtle 
@@ -158,8 +159,9 @@ public class TheCompassScript : MonoBehaviour {
 	}
 
 	void Start(){
-
-		// Assign all our specified graphics - i.e. "Apply the Compass Theme"
+        myCanvas = GameObject.Find("CompassCanvas");
+        //myCanvas.transform.Translate(new Vector3(0,-300,0), Space.Self);
+        // Assign all our specified graphics - i.e. "Apply the Compass Theme"
 		compassBackground.GetComponent<Image>().overrideSprite = compassGUIBackground;
 		compassBackgroundMask.GetComponent<Image>().overrideSprite = compassGUIBackground;
 		northLabel.GetComponent<Image>().overrideSprite = compassGUILabelNorth;
@@ -178,8 +180,8 @@ public class TheCompassScript : MonoBehaviour {
 			compassBookendLeft.GetComponent<Image>().overrideSprite = compassGUIBookEndLeft;
 			compassBookendRight.GetComponent<Image>().overrideSprite = compassGUIBookEndRight;
 		}else{
-			compassBookendLeft.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
-			compassBookendRight.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
+			//compassBookendLeft.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
+			//dompassBookendRight.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
 		}
 
 		// Save our position on start, as this affects where markers/arrows/etc. are placed on the canvas
