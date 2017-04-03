@@ -18,7 +18,7 @@ public class rotate : MonoBehaviour
     {
 
         //transform.Rotate(Vector3.forward, Time.deltaTime, Space.Self);
-        transform.Rotate(0,0,2);
+        transform.Rotate(0,0,-2);
         //transform.rotation = Random.rotation;
 
 

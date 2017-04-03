@@ -15,9 +15,9 @@ public class Altitude : MonoBehaviour
 {
 
     ///Set the maximum value of the altitude.
-    public static float maxAltitude = 10f;
+    public float maxAltitude = 10f;
     ///The airspeed property sets the value of the current altitude. This value will change depending on the user's height.
-    public static float altitude;
+    public float altitude = 0f;
     ///The altitude text locates the textbox in unity.
     private Text altitudeText;
     ///The altitude bar image locates the image in unity to be animated.
@@ -39,15 +39,17 @@ public class Altitude : MonoBehaviour
         //find the altitude bar component in unity, and set it to zero.
         altitudeBar = GameObject.Find("AltitudeBarFill").GetComponent<Image>();
         altitudeBar.fillAmount = 0f;
+        
 
         //find the altitude textbox in unity to display the numerical value of the user's height
         altitudeText = GameObject.Find("AltitudeText").GetComponent<Text>();
-        altitudeText.text = altitude.ToString();
+        altitudeText.text = "0.0";
+        //altitudeText.text = altitude.ToString();
 
         //loop that will reduce the altitude value over time. comment out this line to use the data reciever above.
         //InvokeRepeating("ReduceAltitude", 0f, 0.5f);
-        SetAltitudeBar(altitude);
-        altitudeText.text = altitude.ToString();
+        //SetAltitudeBar(altitude);
+        // altitudeText.text = altitude.ToString();
     }
 
     /// A simple loop to show a simple animation of the altitude graphic
@@ -57,7 +59,7 @@ public class Altitude : MonoBehaviour
     /// This function is not used when getting data from the listener.
     void ReduceAltitude()
     {
-        altitudeBar.fillAmount = altitude / 100;
+        altitudeBar.fillAmount = altitude / 10;
         altitude -= 1f;
         if (altitude < 0f)
         {
@@ -68,12 +70,12 @@ public class Altitude : MonoBehaviour
 
     /// Sets the airspeed value to the airspeed bar in the heads up display.
     /// Changes the altitude display to match altitude value
-    /// <param name="myAltitude"></param>
-    public void SetAltitudeBar(float myAltitude)
-    {
-        //myAltitude is value 0, 1
-        altitudeBar.fillAmount = myAltitude / maxAltitude;
-    }
 
+    void Update()
+    {
+        altitudeBar.fillAmount = altitude / maxAltitude;
+        altitudeText.text = altitude.ToString();
+
+    }
 
 }

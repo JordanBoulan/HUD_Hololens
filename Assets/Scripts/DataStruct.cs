@@ -31,5 +31,16 @@ public class DataStruct : MonoBehaviour
     ///get values for gforce
     public float[] gforceData { get; set; }
 
+    void start()
+    {
+
+    }
+
+    void update()
+    {
+
+
+    }
 }
+
 

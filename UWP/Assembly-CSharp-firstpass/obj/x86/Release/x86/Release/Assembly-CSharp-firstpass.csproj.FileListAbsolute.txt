@@ -35,7 +35,6 @@ C:\Users\kdo\Desktop\HUD_Hololens-Cleanup\UWP\Assembly-CSharp-firstpass\obj\x86\
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\bin\x86\Release\Assembly-CSharp-firstpass.dll
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\bin\x86\Release\Assembly-CSharp-firstpass.pdb
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\bin\x86\Release\Assembly-CSharp-firstpass.pri
-C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\Assembly-CSharp-firstpass.dll
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\Assembly-CSharp-firstpass.pdb
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\priconfig.xml
@@ -49,3 +48,4 @@ C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Rele
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\qualifiers.txt
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\qualifiers.txt.intermediate
 C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\MultipleQualifiersPerDimensionFound.txt
+C:\Users\kdo\Desktop\hud\HUD_Hololens\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache

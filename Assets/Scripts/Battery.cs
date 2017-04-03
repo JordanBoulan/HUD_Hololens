@@ -54,22 +54,26 @@ public class Battery : MonoBehaviour
     public void changeColor()
     {
         //set color of text and image to red if battery percentage is between 0 and 10
-        if (batteryPercentage >= 0 && batteryPercentage <= 10)
+        if (batteryPercentage >= 0 && batteryPercentage <= 25)
         {
             battery.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
             text.GetComponent<Text>().color = new Color32(255, 0, 0, 255);
+            Warnings.setWarning("Battery: below 25%");
         }
         //set color of text and image to yellow if battery percentage is between 10 and 25
-        else if (batteryPercentage > 10 && batteryPercentage <= 25)
+        else if (batteryPercentage > 25 && batteryPercentage <= 50)
         {
             battery.GetComponent<Image>().color = new Color32(251, 255, 0, 255);
             text.GetComponent<Text>().color = new Color32(255, 255, 0, 255);
+            Warnings.setWarning("Battery: below 50%");
+
         }
         //set color of text and image to green
         else
         {
             battery.GetComponent<Image>().color = new Color32(33, 255, 47, 155);
             text.GetComponent<Text>().color = new Color32(33, 255, 47, 255);
+            Warnings.clearWarning();
         }
     }
 

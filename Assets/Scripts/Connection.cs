@@ -6,7 +6,7 @@ using System.IO;
 #if !UNITY_EDITOR
 using Windows.Networking.Sockets;
     using Windows.Networking;
-    //using Newtonsoft.Json.Serialization;
+    using Newtonsoft.Json.Serialization;
 #endif
 
 /// <summary>
@@ -74,9 +74,9 @@ public class Connection : MonoBehaviour
                     Stream streamIn = args.GetDataStream().AsStreamForRead();
                     StreamReader reader = new StreamReader(streamIn);
 
-                    //string jsonData = await reader.ReadToEndAsync();
-                    //DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(jsonData);
-                    //UdpEvent.onDataRecieved(newData);
+                    string jsonData = await reader.ReadLineAsync();
+                    DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(jsonData);
+                    UdpEvent.onDataRecieved(newData);
                 }
 
                 catch (Exception e)

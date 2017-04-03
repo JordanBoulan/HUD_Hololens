@@ -17,7 +17,7 @@ public class Airspeed : MonoBehaviour
     ///Set the maximum value of the airspeed.
     public float maxAirspeed = 30f;
     ///The airspeed property sets the value of the current airspeed. This value will change depending on the user's speed.
-    public float airspeed;
+    public float airspeed = 0f;
     ///The airspeed text locates the textbox in unity.
     private Text airspeedText;
     ///The airspeed bar image locates the image in unity to be animated.
@@ -25,7 +25,7 @@ public class Airspeed : MonoBehaviour
 
     /// Gets the airspeed from the data listener
     /// <param name="newData"></param>
-    private void dataUpdater(DataStruct newData)
+    public void dataUpdater(DataStruct newData)
     {
         airspeed = (float)newData.speedData;
     }
@@ -42,12 +42,10 @@ public class Airspeed : MonoBehaviour
 
         //find the airspeed textbox in unity to display the numerical value of the user's speed
         airspeedText = GameObject.Find("AirspeedText").GetComponent<Text>();
-        airspeedText.text = airspeed.ToString();
+        airspeedText.text = "0.0";
 
-        //loop that will reduce the airspeed value over time. comment out this line to use the data reciever above.
-        //InvokeRepeating("ReduceAirspeed", 0f, 0.2f);
-        SetAirspeedBar(airspeed);
-        airspeedText.text = airspeed.ToString();
+  
+        
     }
 
     /// A simple loop to show a simple animation of the airspeed graphic
@@ -57,7 +55,7 @@ public class Airspeed : MonoBehaviour
     /// This function is not used when getting data from the listener.
     private void ReduceAirspeed()
     {
-        airspeedBar.fillAmount = airspeed / 100;
+        airspeedBar.fillAmount = airspeed / 30;
         airspeed -= 1f;
         if (airspeed < 0f)
         {
@@ -68,11 +66,11 @@ public class Airspeed : MonoBehaviour
 
     /// Sets the airspeed value to the airspeed bar in the heads up display.
     /// Changes the airspeed display to match user's airspeed
-    /// <param name="myAirspeed"></param>
-    private void SetAirspeedBar(float myAirspeed)
+    void Update()
     {
-        //myAltitude is value 0, 1
-        airspeedBar.fillAmount = myAirspeed / maxAirspeed;
+        //myAltitude is value 0
+        airspeedBar.fillAmount = airspeed / maxAirspeed;
+        airspeedText.text = airspeed.ToString();
     }
 
 
