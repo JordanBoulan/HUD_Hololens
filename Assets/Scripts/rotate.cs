@@ -1,28 +1,28 @@
-﻿//https://forum.unity3d.com/threads/is-there-an-horizon-line.23064/
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class rotate : MonoBehaviour
+/// <summary>
+/// File: Rotate.cs \n
+/// Date Last Modified: 2/18/2017 \n
+/// Description: Simple rotate script to rotate an object clockwise.
+/// Currently set to the images components in the fanSpinning game
+/// object for the rotations you see in the HUD
+/// </summary>
+
+public class Rotate : MonoBehaviour
 {
+    /// <value> Set the zVal for rotation. (-) value would make the image rotate clockwise, 
+    /// while a (+) value would make it rotate counter-clockwise. The greater the value,
+    /// the faster it would rotate. 
+    /// </value>
+    private float zVal = -2;
 
-    // Use this for initialization
-    void Start()
-    {
-
+    /// <summary>
+    /// Function to rotate the object. 
+    /// </summary>
+    public void Update() {
+        //rotates object clockwise
+        transform.Rotate(0, 0, zVal);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        //transform.Rotate(Vector3.forward, Time.deltaTime, Space.Self);
-        transform.Rotate(0,0,-2);
-        //transform.rotation = Random.rotation;
-
-
-
-    }
-
 }

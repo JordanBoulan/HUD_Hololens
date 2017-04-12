@@ -3,18 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-//
-// The Compass Script
-// This script controls central compass behaviour and CompassMarker management
-//
-// Place TheCompass prefab in your scene, and attach CompassCamera prefab as a child
-// of your player or equivalent game avatar. Compass Camera should have the same 
-// position and rotation as your main camera. For example, make it a child of the 
-// Standard "First Person Controller" Game Object. The CompassCamera is used to 
-// determine position relative to marked objects. Any offset will affect the
-// accuracy of distance/position calculations.
-// Copyright 2016 While Fun Games
-// http://whilefun.com
+/// <summary>
+/// The Compass Script
+/// This script controls central compass behaviour and CompassMarker management
+///
+/// Place TheCompass prefab in your scene, and attach CompassCamera prefab as a child
+/// of your player or equivalent game avatar. Compass Camera should have the same 
+/// position and rotation as your main camera. For example, make it a child of the 
+/// Standard "First Person Controller" Game Object. The CompassCamera is used to 
+/// determine position relative to marked objects. Any offset will affect the
+/// accuracy of distance/position calculations.
+/// Copyright 2016 While Fun Games
+/// http://whilefun.com
+/// </summary>
+
 //
 public class TheCompassScript : MonoBehaviour {
 

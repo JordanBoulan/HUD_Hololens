@@ -3,6 +3,8 @@ using System.Collections;
 using System;
 using System.IO;
 
+//comment out line "using Newtonsoft.Json.Serialization;" before building in Unity,
+//uncomment the line after building, but before installing to hololens
 #if !UNITY_EDITOR
 using Windows.Networking.Sockets;
     using Windows.Networking;
@@ -11,36 +13,37 @@ using Windows.Networking.Sockets;
 
 /// <summary>
 /// File: Connection.cs \n
-/// Author: Jordan Boulanger \n
-/// Creation date: \n
 /// Date Last Modified: 1/26/2017 \n
-/// Description: UDP Connection initilization and listener. Fires a C# event (udpEvent) 
+/// Description: UDP Connection initilization and listener. Fires a C# event (udpEvent).
 /// when it recieves data.
 /// </summary>
 /// 
 
 public class Connection : MonoBehaviour
 {
-    #if !UNITY_EDITOR
+#if !UNITY_EDITOR
             DatagramSocket socket;
             string listenPort = "5005";
+			
+			static public int lostPackets {get; set;}
 
 
 
-    #endif
-        // use this for initialization
-    #if !UNITY_EDITOR
+#endif
+    // use this for initialization
+#if !UNITY_EDITOR
         async void Start()
         {
-    #endif
-    #if UNITY_EDITOR
-        void Start()
-        {
-    #endif
+#endif
+#if UNITY_EDITOR
+    void Start()
+    {
+#endif
 
-    
 
-    #if !UNITY_EDITOR
+
+#if !UNITY_EDITOR
+                lostPackets = 0;
                 Debug.Log("Waiting for a connection...");
 
                 socket = new DatagramSocket();
@@ -60,11 +63,12 @@ public class Connection : MonoBehaviour
                 }
 
                 Debug.Log("exit start");
-    #endif
-        }
-
-    #if !UNITY_EDITOR
-            private async void Socket_MessageReceived(Windows.Networking.Sockets.DatagramSocket sender,
+#endif
+    }
+    //comment out lines 80-85 before building in Unity
+    //uncomment the lines after building, but before installing to hololens
+#if !UNITY_EDITOR
+    private async void Socket_MessageReceived(Windows.Networking.Sockets.DatagramSocket sender,
                 Windows.Networking.Sockets.DatagramSocketMessageReceivedEventArgs args)
             {
 
@@ -76,7 +80,11 @@ public class Connection : MonoBehaviour
 
                     string jsonData = await reader.ReadLineAsync();
                     DataStruct newData = Newtonsoft.Json.JsonConvert.DeserializeObject<DataStruct>(jsonData);
-                    UdpEvent.onDataRecieved(newData);
+					lostPackets += newData.packetNumber - DataCleaner.packetCounter - 1;
+					bool packetIntegrity = DataCleaner.checkDataValues(newData);
+                    if (packetIntegrity == true)
+						UdpEvent.onDataRecieved(newData);
+					
                 }
 
                 catch (Exception e)
@@ -85,5 +93,5 @@ public class Connection : MonoBehaviour
             
                 }
             }
-    #endif
+#endif
 }

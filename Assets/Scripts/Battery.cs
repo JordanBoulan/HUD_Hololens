@@ -5,7 +5,6 @@ using System;
 
 /// <summary>
 /// File: Battery.cs \n
-/// Creation date: \n
 /// Date Last Modified: 2/26/2017 \n
 /// Description: Battery code to manage the battery graphic. The program
 /// locates the required game objects from Unity ("batteryAnimation" and
@@ -15,25 +14,29 @@ using System;
 
 public class Battery : MonoBehaviour
 {
-    ///Set the battery percentage to 100 (max).
+    /// <value> Used to store the battery percentage. </value>
     public float batteryPercentage;
-    ///Representation of the RGBA color space.
+    /// <value> Representation of the RGBA color space. </value>
     public Color color;
-    ///Used to locate the battery image that will be animated based on the percentage.
+    /// <value> Used to locate the battery image that will be animated based on the percentage. </value>
     public Image battery;
-    ///To be used for the textbox in unity.
+    /// <value> To be used for the textbox in unity. </value>
     public Text text;
-    ///Used to delay the loop of battery animation.
+    /// <value> Used to delay the loop of battery animation. </value>
     public static int count = 0;
 
-    /// Gets the battery value from the data listener
-    /// <param name="newData"></param>
+    /// <summary>
+    /// Gets the battery value from the data listener.
+    /// <param name="newData"> New value coming from data generator. </param>
+    /// </summary>
     public void dataListener(DataStruct newData)
     {
         batteryPercentage = (int)newData.batteryData;
     }
 
-    /// Locates and grabs the image and text components from the Unity project for the battery bar and textbox
+    /// <summary> 
+    /// Locates and grabs the image and text components from the Unity project for the battery bar and textbox.
+    /// </summary>
     public void Start()
     {
         //get value from data receiver
@@ -46,39 +49,45 @@ public class Battery : MonoBehaviour
         //find the textbox component in Unity.
         text = GameObject.Find("BatteryText").GetComponent<Text>();
     }
-
-    /// Changes the color of the battery graphic and text depending on the value of the battery percentage \n
-    /// Red: when the battery is between 0 and 10 percent \n
-    /// Yellow: when the battery is between 10 and 25 percent \n
-    /// Green: when the battery is 25 to 100 percent
+    /// <summary>
+    /// Changes the color of the battery graphic and text depending on the value of the battery percentage. \n
+    /// If the battery is at a certain value, it will display a warning text towards the bottom of the UI. \n
+    /// Red: When the battery is between 0 and 10 percent. \n
+    /// Yellow: When the battery is between 10 and 25 percent. \n
+    /// Green: When the battery is 25 to 100 percent.
+    /// </summary>
     public void changeColor()
     {
-        //set color of text and image to red if battery percentage is between 0 and 10
+        //set color of text and image to red if battery percentage is between 0 and 25
+        //displays a warning in the UI
         if (batteryPercentage >= 0 && batteryPercentage <= 25)
         {
             battery.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
             text.GetComponent<Text>().color = new Color32(255, 0, 0, 255);
-            Warnings.setWarning("Battery: below 25%");
+            Warnings.setWarning("WARNING: Battery below 25%");
         }
-        //set color of text and image to yellow if battery percentage is between 10 and 25
+        //set color of text and image to yellow if battery percentage is between 25 and 50
+        //displays a warning in the UI
         else if (batteryPercentage > 25 && batteryPercentage <= 50)
         {
-            battery.GetComponent<Image>().color = new Color32(251, 255, 0, 255);
+            battery.GetComponent<Image>().color = new Color32(255, 255, 0, 255);
             text.GetComponent<Text>().color = new Color32(255, 255, 0, 255);
-            Warnings.setWarning("Battery: below 50%");
+            Warnings.setWarning("WARNING: Battery below 50%");
 
         }
         //set color of text and image to green
+        //also clears warning message
         else
         {
-            battery.GetComponent<Image>().color = new Color32(33, 255, 47, 155);
-            text.GetComponent<Text>().color = new Color32(33, 255, 47, 255);
+            battery.GetComponent<Image>().color = new Color32(32, 255, 46, 155);
+            text.GetComponent<Text>().color = new Color32(32, 255, 46, 255);
             Warnings.clearWarning();
         }
     }
-
-    /// Simple loop animation to reduce the percentage value over time
-    /// This function is not used when getting data from generator
+    /// <summary>
+    /// Simple loop animation to reduce the percentage value over time.
+    /// This function is not used when getting data from generator.
+    /// </summary>
     public void reduceBattery()
     {
         count++;
@@ -94,7 +103,9 @@ public class Battery : MonoBehaviour
         }
     }
 
+    /// <summary>
     /// Update is called to update the graphic and textbox in the heads up display in Unity.
+    /// </summary>
     public void Update()
     {	
         battery.fillAmount = (float)batteryPercentage / 100; //get battery value from listener, convert to a percentage (x/100)

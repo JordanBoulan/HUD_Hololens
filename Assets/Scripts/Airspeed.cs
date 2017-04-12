@@ -4,7 +4,6 @@ using System.Collections;
 
 /// <summary>
 /// File: Airspeed.cs \n
-/// Creation date: \n
 /// Date Last Modified: 2/26/2017 \n
 /// Description: Airspeed code to manage the animation and text of the airspeed graphic. The program 
 /// finds the required game objects ("AirspeedBarFill" and "AirspeedText") in Unity in order to change them.
@@ -14,24 +13,28 @@ using System.Collections;
 public class Airspeed : MonoBehaviour
 {
 
-    ///Set the maximum value of the airspeed.
+    /// <value> Set the maximum value of the airspeed. </value>
     public float maxAirspeed = 30f;
-    ///The airspeed property sets the value of the current airspeed. This value will change depending on the user's speed.
+    /// <value> The airspeed property sets the value of the current airspeed. This value will change depending on the user's speed. </value>
     public float airspeed = 0f;
-    ///The airspeed text locates the textbox in unity.
+    /// <value> The airspeed text locates the textbox in unity. </value>
     private Text airspeedText;
-    ///The airspeed bar image locates the image in unity to be animated.
+    /// <value> The airspeed bar image locates the image in unity to be animated. </value>
     private Image airspeedBar;
 
+    /// <summary>
     /// Gets the airspeed from the data listener
-    /// <param name="newData"></param>
+    /// <param name="newData"> New value coming from data generator. </param> 
+    /// </summary>
     public void dataUpdater(DataStruct newData)
     {
         airspeed = (float)newData.speedData;
     }
 
-    /// Locates and grabs the image and text components from the Unity project for the airspeed bar and textbox
-    void Start()
+    /// <summary>
+    /// Locates and grabs the image and text components from the Unity project for the airspeed bar and textbox.
+    /// </summary>
+    public void Start()
     {
         //get values from data generator
         UdpEvent.dataRecieved += new UdpEvent.DataRecievedEvent(dataUpdater);
@@ -43,16 +46,15 @@ public class Airspeed : MonoBehaviour
         //find the airspeed textbox in unity to display the numerical value of the user's speed
         airspeedText = GameObject.Find("AirspeedText").GetComponent<Text>();
         airspeedText.text = "0.0";
-
-  
-        
     }
 
-    /// A simple loop to show a simple animation of the airspeed graphic
+    /// <summary>
+    /// A simple loop to show a simple animation of the airspeed graphic.
     /// The function reduces the value airspeed over time. If the value is 0, it is reset to the max airspeed, 30.
     /// The value of the airspeed is also sent to the text box to display the current value.  
     /// 
     /// This function is not used when getting data from the listener.
+    /// </summary>
     private void ReduceAirspeed()
     {
         airspeedBar.fillAmount = airspeed / 30;
@@ -64,9 +66,11 @@ public class Airspeed : MonoBehaviour
         
     }
 
+    /// <summary>
     /// Sets the airspeed value to the airspeed bar in the heads up display.
-    /// Changes the airspeed display to match user's airspeed
-    void Update()
+    /// Changes the airspeed display to match user's airspeed.
+    /// </summary>
+    public void Update()
     {
         //myAltitude is value 0
         airspeedBar.fillAmount = airspeed / maxAirspeed;
