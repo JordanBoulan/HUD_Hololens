@@ -138,7 +138,7 @@ public class gForce : MonoBehaviour
         }*/
 
         //set values to textbox in Unity
-        Debug.Log(gForce1.brake);
+        
         brakeText.text = gForce1.brake + "";
         rightText.text = gForce1.right + "";
         leftText.text  = gForce1.left  + "";
