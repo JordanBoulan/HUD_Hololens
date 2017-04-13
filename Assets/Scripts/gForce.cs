@@ -17,37 +17,38 @@ using System;
 /// location on the x y plane.
 /// </summary>
 
-/// <summary>
-/// Enclose the 4 different variables for the gForce values.
-/// </summary>
-struct gForceValues
-{
-    /// <value> Brake value </value>
-    public float brake;
-    /// <value> Acceleration value </value>
-    public float accel;
-    /// <value> Left value </value>
-    public float left;
-    /// <value> Right value </value>
-    public float right;
-};
-
+//****
+	
 public class gForce : MonoBehaviour
 {
-   
+    //does this have to be outside the class above? @****
+    /// <summary>
+    /// Enclose the 4 different variables for the gForce values.
+    /// </summary>
+    struct gForceValues
+    {
+        /// <value> Brake value </value>
+        public float brake;
+        /// <value> Acceleration value </value>
+        public float accel;
+        /// <value> Left value </value>
+        public float left;
+        /// <value> Right value </value>
+        public float right;
+    };
 
     /// <value> The theta angle for gforce. </value>  
     public float theta;
     /// <value> The gForce value. </value>  
     public float gForceVal;
     /// <value> Use for the brake text in Unity. </value>
-    private Text brakeText;
+    public Text brakeText;
     /// <value> Use for the right text in Unity. </value>
-    private Text rightText;
+    public Text rightText;
     /// <value> Use for the left text in Unity. </value>
-    private Text leftText;
+    public Text leftText;
     /// <value> Use for the acceleration text in Unity. </value>
-    private Text accelText;
+    public Text accelText;
     /// <value> Use to delay the loop of text animation. </value>
     public static int count = 0;
     /// <value> Used to get image from Unity. </value>
@@ -127,7 +128,7 @@ public class gForce : MonoBehaviour
         //acceleration text
         accelText = GameObject.Find("AccelText").GetComponent<Text>();
         //get dot image
-        gforceImage = GameObject.Find("gforceImage").GetComponent<RawImage>();
+        gforceImage = GameObject.Find("gforceDot").GetComponent<RawImage>();
     }
 
     /// <summary>
@@ -142,12 +143,12 @@ public class gForce : MonoBehaviour
         
         //if the gForce value is not 0, find the x and y value from the data generator.
         if (gForceVal != 0) {
-            xPos = gForceVal * (float)Math.Cos(theta) * 6.05f;
-            yPos = gForceVal * (float)Math.Sin(theta) * 6.05f;
+            xPos = gForceVal * (float)Math.Cos(theta);// * 6.05f;
+            yPos = gForceVal * (float)Math.Sin(theta);// * 6.05f;
         }
         
 
-        gforceImage.transform.localPosition = new Vector3(xPos, yPos, 0);
+        //gforceImage.transform.localPosition = new Vector3(xPos, yPos, 0);
 		calculateGforce(gForceVal, theta);
         /*
         // set dot in gForce to a random location with a radius of 4.

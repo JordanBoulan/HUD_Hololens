@@ -277,6 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4a9f0463d14ca439df1814d58e61a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAirspeed: 30
+  airspeed: 0
 --- !u!114 &13036697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a1c0f0fdfed224f8a4eb4321fabdf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAltitude: 10
+  altitude: 0
 --- !u!114 &237470843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,6 +590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf59702e30c22a4ea414ae2705f980b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  temperature: {fileID: 0}
+  tempText: {fileID: 0}
 --- !u!1 &467230262
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +635,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61f8b44febbbce4fb0422977d7a46bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  batteryPercentage: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  battery: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &538995066
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,6 +683,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c8ad7bb2927844ab229b82744720ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fanPercentage: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  fan: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &541768058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,6 +1812,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09bc97981e0d20046b27ef5e8a13ca05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  compassCamera: {fileID: 0}
+  headingBlock: {fileID: 0}
 --- !u!114 &1156911779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2938,6 +2954,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efacb63ebd6e9e842b052beb75b5150c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theta: 0
+  gForceVal: 0
+  brakeText: {fileID: 0}
+  rightText: {fileID: 0}
+  leftText: {fileID: 0}
+  accelText: {fileID: 0}
 --- !u!1 &1742083062
 GameObject:
   m_ObjectHideFlags: 0
