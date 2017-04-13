@@ -17,7 +17,6 @@ using UnityEngine.UI;
 /// http://whilefun.com
 /// </summary>
 
-//
 public class TheCompassScript : MonoBehaviour {
 
     // You can replace these textures with your own graphics in the Inspector

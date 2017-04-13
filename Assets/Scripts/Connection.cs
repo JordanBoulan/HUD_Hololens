@@ -24,8 +24,7 @@ public class Connection : MonoBehaviour
 #if !UNITY_EDITOR
             DatagramSocket socket;
             string listenPort = "5005";
-			
-			static public int lostPackets {get; set;}
+			public static int lostPackets {get; set;}
 
 
 
