@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+/// <summary>
+/// Author: Jordan Boulanger
+/// Date: 4/11/17
+/// Unity C# Script for the heading graphic. Whenever the user looks up or down, the graphic will change. 
+/// </summary>
+
 public class Heading : MonoBehaviour
 {
 
@@ -12,7 +18,9 @@ public class Heading : MonoBehaviour
     private float currentX = 0.0f;
     RawImage headingTexture;
 
-    // Use this for initialization
+    /// <summary>
+    /// Gets the camera and heading (middle of UI) object from Unity and assigns them to a variable.
+    /// </summary>
     void Start()
     {
         compassCamera = GameObject.FindGameObjectWithTag("CompassCamera");
@@ -23,8 +31,9 @@ public class Heading : MonoBehaviour
         
     }
 
-
-    // Update is called once per frame
+    /// <summary>
+    /// 
+    /// </summary>
     void Update()
     {
         currentZ = compassCamera.transform.localRotation.eulerAngles.z;
@@ -37,11 +46,11 @@ public class Heading : MonoBehaviour
             newY = 0.414f + (currentX / 10.0f * 0.027f);
   
         }
-       else if (currentX < 180)
+        else if (currentX < 180)
         {
             newY = 0.414f - (currentX / 10.0f * 0.027f);
         }
-       else if (currentX == 0)
+        else if (currentX == 0)
         {
             newY = 0.414f;
         }

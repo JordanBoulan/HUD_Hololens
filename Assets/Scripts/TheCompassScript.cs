@@ -5,78 +5,85 @@ using UnityEngine.UI;
 
 /// <summary>
 /// The Compass Script
-/// This script controls central compass behaviour and CompassMarker management
+/// This script controls central compass behaviour and CompassMarker management \n
 ///
-/// Place TheCompass prefab in your scene, and attach CompassCamera prefab as a child
-/// of your player or equivalent game avatar. Compass Camera should have the same 
-/// position and rotation as your main camera. For example, make it a child of the 
-/// Standard "First Person Controller" Game Object. The CompassCamera is used to 
-/// determine position relative to marked objects. Any offset will affect the
-/// accuracy of distance/position calculations.
-/// Copyright 2016 While Fun Games
+/// Place TheCompass prefab in your scene, and attach CompassCamera prefab as a child \n
+/// of your player or equivalent game avatar. Compass Camera should have the same \n
+/// position and rotation as your main camera. For example, make it a child of the \n
+/// Standard "First Person Controller" Game Object. The CompassCamera is used to \n 
+/// determine position relative to marked objects. Any offset will affect the \n
+/// accuracy of distance/position calculations. \n
+/// Copyright 2016 While Fun Games \n
 /// http://whilefun.com
 /// </summary>
 
 public class TheCompassScript : MonoBehaviour {
 
     // You can replace these textures with your own graphics in the Inspector
-    [Tooltip("The main Compass GUI graphic")]
+    /// <value> The main Compass GUI graphic. </value>
     public GameObject myCanvas;
+    /// <value> The compass background GUI graphic. </value>
 	public Sprite compassGUIBackground;
-	[Tooltip("Turn Bookend graphic On and Off")]
+	/// <value> Turn Bookend graphic On and Off. </value>
 	public bool drawCompassBookends = true;
 	public Sprite compassGUIBookEndLeft;
 	public Sprite compassGUIBookEndRight;
-	[Tooltip("Turn Ticks graphic On and Off")]
+	/// <value> Turn Ticks graphic On and Off. </value>
 	public bool drawCompassTicks = true;
 	public Sprite compassGUITicks;
+    /// <value> Compass North Label. </value>
 	public Sprite compassGUILabelNorth;
+    /// <value> Compass South Label. </value>
 	public Sprite compassGUILabelSouth;
+    /// <value> Compass East Label. </value>
 	public Sprite compassGUILabelEast;
+    /// <value> Compass West Label. </value>
 	public Sprite compassGUILabelWest;
-	[Tooltip("Turn Up/Down arrow graphic On and Off")]
-	public bool drawUpDownArrows = true;
-	[Tooltip("Turn Up/Down Arrow graphic padding On and Off. When Off, vertical position of Distance text is static.")]
-	public bool padUpDownArrows = true;
-	[Tooltip("The vertical pixel offset of up/down arrows")]
-	public float upDownArrowOffset = 0.0f;
+    /// <value> Turn Up/Down arrow graphic On and Off. </value>
+    public bool drawUpDownArrows = true;
+    /// <value> Turn Up/Down Arrow graphic padding On and Off. When Off, vertical position of Distance text is static. </value>
+    public bool padUpDownArrows = true;
+    /// <value> The vertical pixel offset of up/down arrows. </value>
+    public float upDownArrowOffset = 0.0f;
 	public Sprite compassMarkerUpArrow;
 	public Sprite compassMarkerDownArrow;
 
-	// Distance Text
-	[Tooltip("Turn Distance Text On and Off")]
-	public bool drawDistanceText = true;
-	[Tooltip("The vertical pixel offset of the distance text")]
-	public float distanceTextOffset = 0.0f;
+    // Distance Text
+    /// <value> Turn Distance Text On and Off </value>
+    public bool drawDistanceText = true;
+    /// <value> The vertical pixel offset of the distance text. </value>
+    public float distanceTextOffset = 0.0f;
 	public Color compassGUITextColor = Color.white;
-	[Tooltip("Turn Distance Text Outline On and Off")]
-	public bool outlineDistanceText = true;
+    /// <value> Turn Distance Text Outline On and Off </value>
+    public bool outlineDistanceText = true;
 	public Color compassGUITextOutlineColor = Color.black;
-	[Tooltip("Default font size (Scales with screen size changes)")]
-	public int compassBaseFontSize = 12;
-	// How far up/down a marker needs to be in order to be flagged with up/down arrow on the compass
-	[Tooltip("Min vertical distance before drawing up/down arrows above Compass Marker")]
-	public float verticalMarkerDistanceThreshold = 2.0f;
-	// The min/max distance are the bounds in which we draw the distance to marker over top of the marker
-	[Tooltip("Min distance to draw distance indicator above Compass Marker")]
-	public float minMarkerDistance = 2.0f;
-	[Tooltip("Max distance to draw distance indicator above Compass Marker")]
+    /// <value> Default font size (Scales with screen size changes) </value>
+    public int compassBaseFontSize = 12;
+    // How far up/down a marker needs to be in order to be flagged with up/down arrow on the compass
+    /// <value> Min vertical distance before drawing up/down arrows above Compass Marker </value>
+    public float verticalMarkerDistanceThreshold = 2.0f;
+    // The min/max distance are the bounds in which we draw the distance to marker over top of the marker
+    /// <value> Min distance to draw distance indicator above Compass Marker </value>
+    public float minMarkerDistance = 2.0f;
+	/// <value> Max distance to draw distance indicator above Compass Marker </value>
 	public float maxMarkerDistance = 50.0f;
-	[Tooltip("Arrow icons to point toward a Marker when hints are enabled on it")]
+	/// <value> Arrow icons to point toward a Marker when hints are enabled on it </value>
 	public Sprite offScreenArrowLeft;
 	public Sprite offScreenArrowRight;
 
-	// Internal stuff
-	private float currentDirectionInDegrees = 0.0f;
+    // Internal, GUI, and UI canvas stuff
+    private float currentDirectionInDegrees = 0.0f;
 	private GameObject worldPoles;
 	private float deltaFromWorldPoles = 0.0f;
 	private float directionInDegrees = 0.0f;
+
 	// GUI stuff
 	private float compassGUINorthPosition = 0.0f;
 	private float compassGUISouthPosition = 0.0f;
 	private float compassGUIEastPosition = 0.0f;
 	private float compassGUIWestPosition = 0.0f;
 	private float distanceBetweenDirectionsOnCompass = 0.0f;
+
 	// UI Canvas Stuff
 	private RectTransform compassBackground;
 	private RectTransform compassBackgroundMask;
@@ -93,17 +100,22 @@ public class TheCompassScript : MonoBehaviour {
 	private GameObject compassCamera;
 	private Vector2 compassBackgroundAnchoredPosition = Vector2.zero;
 
-	// To add more icon types for Compass Markers:
-	// 1) Create the graphic using provided template
-	// 2) Add a new IconType enum value for the new icon type (e.g. eMyIconType)
-	// 3) Add a new public Sprite below (e.g. markerIconMyNewType)
-	// 4) Add case for new enum value in getSpriteFromIconType() function below
+    /// <summary>
+	/// To add more icon types for Compass Markers:
+	/// 1) Create the graphic using provided template
+	/// 2) Add a new IconType enum value for the new icon type (e.g. eMyIconType)
+	/// 3) Add a new public Sprite below (e.g. markerIconMyNewType)
+	/// 4) Add case for new enum value in getSpriteFromIconType() function below
+    /// </summary>
 	public enum IconType {eGeneric, eImportant, eMonster, eCustom};
 	public Sprite markerIconGeneric;
 	public Sprite markerIconImportant;
 	public Sprite markerIconMonster;
 
-	void Awake(){
+    /// <summary>
+    /// Gets the required Unity objects (world poles, and camera). 
+    /// </summary>
+	public void Awake(){
 		
 		worldPoles = GameObject.FindGameObjectWithTag("CompassWorldPoles");
 		if(!worldPoles){
@@ -159,7 +171,10 @@ public class TheCompassScript : MonoBehaviour {
 		
 	}
 
-	void Start(){
+    /// <summary>
+    /// Grabs the different graphics in Unity, and assigns them to variables, and save our position on start.
+    /// </summary>
+	public void Start(){
         myCanvas = GameObject.Find("CompassCanvas");
         //myCanvas.transform.Translate(new Vector3(0,-300,0), Space.Self);
         // Assign all our specified graphics - i.e. "Apply the Compass Theme"
@@ -190,8 +205,13 @@ public class TheCompassScript : MonoBehaviour {
 		compassBackgroundAnchoredPosition.y = compassBackground.anchoredPosition.y;
 
 	}
-	
-	void Update(){
+
+    /// <summary>
+    /// This function adjusts the the the graphics (ticks and labels) on the UI depending on which way the 
+    /// camera/user is facing. It also ensures that if the user is not facing a certain direction, that 
+    /// label will not be displayed on the UI.
+    /// </summary>
+    public void Update(){
 
 		// Determine our direction relative to WorldPoles
 		currentDirectionInDegrees = compassCamera.transform.rotation.eulerAngles.y;
@@ -223,6 +243,8 @@ public class TheCompassScript : MonoBehaviour {
 		Vector2 tempLabelPosition = Vector2.zero;
 
 		// Only show if in bounds, otherwise just make it invisible
+
+        // North label
 		if(compassGUINorthPosition > (compassBackground.anchoredPosition.x - compassBackground.rect.width/2 + northLabel.rect.width/2) && compassGUINorthPosition < (compassBackground.anchoredPosition.x + compassBackground.rect.width/2 - northLabel.rect.width/2)){
 			northLabel.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
 			tempLabelPosition = northLabel.anchoredPosition;
@@ -231,7 +253,8 @@ public class TheCompassScript : MonoBehaviour {
 		}else{
 			northLabel.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
 		}
-		
+
+        // South label
 		if(compassGUISouthPosition > (compassBackground.anchoredPosition.x - compassBackground.rect.width/2 + southLabel.rect.width/2) && compassGUISouthPosition < (compassBackground.anchoredPosition.x + compassBackground.rect.width/2 - southLabel.rect.width/2)){
 			southLabel.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
 			tempLabelPosition = southLabel.anchoredPosition;
@@ -241,6 +264,7 @@ public class TheCompassScript : MonoBehaviour {
 			southLabel.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
 		}
 		
+        // East label
 		if(compassGUIEastPosition > (compassBackground.anchoredPosition.x - compassBackground.rect.width/2 + eastLabel.rect.width/2) && compassGUIEastPosition < (compassBackground.anchoredPosition.x + compassBackground.rect.width/2 - eastLabel.rect.width/2)){
 			eastLabel.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
 			tempLabelPosition = eastLabel.anchoredPosition;
@@ -250,6 +274,7 @@ public class TheCompassScript : MonoBehaviour {
 			eastLabel.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
 		}
 		
+        // West label
 		if(compassGUIWestPosition > (compassBackground.anchoredPosition.x - compassBackground.rect.width/2 + westLabel.rect.width/2) && compassGUIWestPosition < (compassBackground.anchoredPosition.x + compassBackground.rect.size.x/2 - westLabel.rect.width/2)){
 			westLabel.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
 			tempLabelPosition = westLabel.anchoredPosition;
@@ -265,11 +290,15 @@ public class TheCompassScript : MonoBehaviour {
 
 	}
 
-	// Adds a marker icon to compass
-	// Specify an icon type if desired, otherwise it is assumed you are using a custom icon
-	// Note: This function is different than the others as it places the UI element as a child of 
-	// the CompassMarkerContrainer, which is not offset from the main canvas at all :)
-	public void putIconOnCompass(RectTransform iconToAdd, IconType iconType=IconType.eCustom){
+    /// <summary>
+    /// Adds a marker icon to compass
+    /// Specify an icon type if desired, otherwise it is assumed you are using a custom icon
+    /// Note: This function is different than the others as it places the UI element as a child of 
+    /// the CompassMarkerContrainer, which is not offset from the main canvas at all. 
+    /// </summary>
+    /// <param name="iconToAdd"> Add the icon the the UI </param>
+    /// <param name="iconType"> The icon to be added to the UI </param>
+    public void putIconOnCompass(RectTransform iconToAdd, IconType iconType=IconType.eCustom){
 
 		iconToAdd.SetParent(compassMarkerContainer, false);
 		Vector2 tempMarkerIconPosition = Vector2.zero;
@@ -282,9 +311,11 @@ public class TheCompassScript : MonoBehaviour {
 		}
 
 	}
-	
-	// Adds distance label to compass, and applies all formatting options specified
-	public void putDistanceLabelOnCompass(RectTransform distanceLabelToAdd){
+
+    /// <summary>
+    /// Adds distance label to compass, and applies all formatting options specified.
+    /// </summary>
+    public void putDistanceLabelOnCompass(RectTransform distanceLabelToAdd){
 
 		distanceLabelToAdd.SetParent(compassMarkerContainer, false);
 		Vector2 tempDistanceLabelPosition = Vector2.zero;
@@ -304,18 +335,23 @@ public class TheCompassScript : MonoBehaviour {
 
 	}
 
-	// Add up/down arrows to indicate vertical position difference
-	public void putUpDownArrowOnCompass(RectTransform upDownArrowToAdd){
+    /// <summary>
+    /// Add up/down arrows to indicate vertical position difference
+    /// </summary>
+    public void putUpDownArrowOnCompass(RectTransform upDownArrowToAdd){
 		
 		upDownArrowToAdd.SetParent(compassMarkerContainer, false);
 		Vector2 tempDistanceLabelPosition = Vector2.zero;
 		tempDistanceLabelPosition.y = upDownArrowOffset;
 		upDownArrowToAdd.anchoredPosition = tempDistanceLabelPosition;
-		
 	}
 
-	// Add off screen hints to compass. Note these are designed for single item use only. They become unreadable
-	// very quickly if more than one set of hints is visible off the same side of the screen at the same time.
+    /// <summary>
+    /// Add off screen hints to compass. Note these are designed for single item use only. They become unreadable
+	/// very quickly if more than one set of hints is visible off the same side of the screen at the same time.
+    /// </summary>
+    /// <param name="offScreenHintLeft"> </param>
+    /// <param name="iconType"> </param>
 	public void putOffscreenHintOnCompass(RectTransform offScreenHintLeft, IconType iconType=IconType.eCustom){
 
 		offScreenHintLeft.SetParent(compassCanvasParent, false);
@@ -327,7 +363,11 @@ public class TheCompassScript : MonoBehaviour {
 
 	}
 
-	// Returns correct Sprite for iconType specified
+    /// <summary>
+    /// The function ensures that the correct image shows up on the compass. (eg. looking north will display the north texture).
+    /// </summary>
+    /// <param name="iconType"> The icon to be displayed on the UI. </param>
+    /// <returns> Returns correct Sprite for iconType specified. </returns>
 	public Sprite getSpriteFromIconType(IconType iconType){
 		
 		Sprite spriteForIconType = markerIconGeneric;
@@ -363,11 +403,16 @@ public class TheCompassScript : MonoBehaviour {
 		return spriteForIconType;
 		
 	}
-
-	// Calculate and returns updated Compass GUI position
-	// Returns Mathf.INFINITY if marker is out of bounds RIGHT of the GUI (and should not be drawn)
-	// Returns Mathf.NEGATIVEINFINITY if marker is out of bounds LEFT of the GUI (and should not be drawn)
-	public float getUpdatedGUIPositionForMarker(Transform markerTransform, float widthOfUIElement){
+    /// <summary>
+    /// Calculate and returns the updated Compass GUI position.
+    /// </summary>
+    /// <param name="markerTransform"> Transform the textures on the UI. </param>
+    /// <param name="widthOfUIElement"> The width of the element shown on the UI. </param>
+    /// <returns> 
+    /// Returns Mathf.INFINITY if marker is out of bounds RIGHT of the GUI (and should not be drawn)
+    /// Returns Mathf.NEGATIVEINFINITY if marker is out of bounds LEFT of the GUI (and should not be drawn)
+    /// </returns>
+    public float getUpdatedGUIPositionForMarker(Transform markerTransform, float widthOfUIElement){
 
 		Vector3 relative = compassCamera.transform.InverseTransformPoint(markerTransform.position);
 		float tempAngle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
@@ -384,11 +429,13 @@ public class TheCompassScript : MonoBehaviour {
 		return newGUIPosition;
 
 	}
-
-	// Calculates and returns vertical positional difference between specified marker transform and compass transform
-	// Used for determining which, if any, up/down arrow icons to display.
-	// Returns up or down arrow Sprite, or null if no sprite should be displayed
-	public Sprite getUpdatedUpDownArrowSprite(Transform markerTransform){
+    /// <summary>
+    /// Calculates and returns vertical positional difference between specified marker transform and compass transform
+    /// Used for determining which, if any, up/down arrow icons to display.
+    /// </summary>
+    /// <param name="markerTransform"> Transform the textures on the UI. </param>
+    /// <returns> Returns up or down arrow Sprite, or null if no sprite should be displayed. </returns>
+    public Sprite getUpdatedUpDownArrowSprite(Transform markerTransform){
 
 		Sprite updatedSprite = null;
 
@@ -402,11 +449,13 @@ public class TheCompassScript : MonoBehaviour {
 
 	}
 
-
-	// Calculates and returns distance between compass and specified transform
-	// If distance if outside bounds specified, Mathf.INFINITY is returned, in which
-	// case, the text should be hidden as it is not inside the valid range
-	public float getUpdatedDistanceToCompass(Transform markerTransform){
+    /// <summary>
+    /// Calculates and returns distance between compass and specified transform. If the text is 
+    /// is outside the range specified, it will be hidden from view.
+    /// </summary>
+    /// <param name="markerTransform"></param>
+    /// <returns> Returns Mathf.INFINITY if the distance is outside the bounds specidfied </returns>
+    public float getUpdatedDistanceToCompass(Transform markerTransform){
 
 		float compassDistance = Vector3.Distance(compassCamera.transform.position, markerTransform.position);
 

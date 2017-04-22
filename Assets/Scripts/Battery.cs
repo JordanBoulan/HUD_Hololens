@@ -84,24 +84,6 @@ public class Battery : MonoBehaviour
             Warnings.clearWarning();
         }
     }
-    /// <summary>
-    /// Simple loop animation to reduce the percentage value over time.
-    /// This function is not used when getting data from generator.
-    /// </summary>
-    public void reduceBattery()
-    {
-        count++;
-        if (count == 20)
-        {
-            batteryPercentage = batteryPercentage - 5; //decrement the width of image
-            count = 0;
-            //reset battery to 100 when it gets to 0 (value doesnt go negative)
-            if (batteryPercentage == 0)
-            {
-                batteryPercentage = 100;
-            }
-        }
-    }
 
     /// <summary>
     /// Update is called to update the graphic and textbox in the heads up display in Unity.
@@ -109,7 +91,6 @@ public class Battery : MonoBehaviour
     public void Update()
     {	
         battery.fillAmount = (float)batteryPercentage / 100; //get battery value from listener, convert to a percentage (x/100)
-        //reduceBattery(); //calls reduce battery function to show simple animation
         text.text = batteryPercentage + "%"; //show the battery value as text in the display
         changeColor(); //calls the change color function.
     }

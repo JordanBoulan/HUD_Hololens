@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
+/// Author: Grant Ikehara, Kevin Do
 /// File: Airspeed.cs \n
 /// Date Last Modified: 2/26/2017 \n
 /// Description: Airspeed code to manage the animation and text of the airspeed graphic. The program 
@@ -46,24 +47,6 @@ public class Airspeed : MonoBehaviour
         //find the airspeed textbox in unity to display the numerical value of the user's speed
         airspeedText = GameObject.Find("AirspeedText").GetComponent<Text>();
         airspeedText.text = "0.0";
-    }
-
-    /// <summary>
-    /// A simple loop to show a simple animation of the airspeed graphic.
-    /// The function reduces the value airspeed over time. If the value is 0, it is reset to the max airspeed, 30.
-    /// The value of the airspeed is also sent to the text box to display the current value.  
-    /// 
-    /// This function is not used when getting data from the listener.
-    /// </summary>
-    private void ReduceAirspeed()
-    {
-        airspeedBar.fillAmount = airspeed / 30;
-        airspeed -= 1f;
-        if (airspeed < 0f)
-        {
-            airspeed = 30f;
-        }
-        
     }
 
     /// <summary>

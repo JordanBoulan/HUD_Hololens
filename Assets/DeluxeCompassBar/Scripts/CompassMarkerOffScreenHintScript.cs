@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 
-//
 // CompassMarkerOffScreenHintScript
 // This script controls behaviour of off screen hint arrows.
 //
@@ -12,7 +11,7 @@ using UnityEngine.UI;
 //
 // Copyright 2016 While Fun Games
 // http://whilefun.com
-//
+
 public class CompassMarkerOffScreenHintScript : MonoBehaviour {
 
 	private RectTransform markerIconArrow;
@@ -39,13 +38,7 @@ public class CompassMarkerOffScreenHintScript : MonoBehaviour {
 
 	}
 
-	void Start(){
-	
-	}
-	
-	void Update(){
-	
-	}
+
 
 	public void updateIconSprite(Sprite updatedSprite){
 		markerIconChild.GetComponent<Image>().overrideSprite = updatedSprite;

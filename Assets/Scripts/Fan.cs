@@ -15,7 +15,7 @@ using System;
 public class Fan : MonoBehaviour
 {
     /// <value> Used to store the the data value for the fan. </value>
-    public float fanPercentage;
+    public float fanRPM;
     /// <value> Representation of the RGBA color space. </value>
     public Color color;
     /// <value> Used to locate the fan image that will be animated based on the percentage. </value>
@@ -31,7 +31,7 @@ public class Fan : MonoBehaviour
     /// </summary>
     public void dataListener(DataStruct newData)
     {
-        fanPercentage = (int)newData.fanData;
+        fanRPM = (int)newData.fanData;
     }
 
     /// <summary>
@@ -59,13 +59,13 @@ public class Fan : MonoBehaviour
     public void changeColor()
     {
         //set color of text and image to red if fan percentage is between 0 and 10
-        if (fanPercentage >= 0 && fanPercentage <= 1500)
+        if (fanRPM >= 0 && fanRPM <= 1500)
         {
             fan.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
             text.GetComponent<Text>().color = new Color32(255, 0, 0, 255);
         }
         //set color of text and image to yellow if fan percentage is between 10 and 25
-        else if (fanPercentage > 1500 && fanPercentage <= 3000)
+        else if (fanRPM > 1500 && fanRPM <= 3000)
         {
             fan.GetComponent<Image>().color = new Color32(251, 255, 0, 255);
             text.GetComponent<Text>().color = new Color32(251, 255, 0, 255);
@@ -79,32 +79,12 @@ public class Fan : MonoBehaviour
     }
 
     /// <summary>
-    /// Simple loop animation to reduce the percentage value over time.
-    /// This function is not used when getting data from generator.
-    /// </summary>
-    public void reduceFan()
-    {
-        count++;
-        if (count == 20)
-        {
-            fanPercentage = fanPercentage - 500; //decrement the width of image
-            count = 0;
-            //reset fan to 100 when it gets to 0 (value doesnt go negative)
-            if (fanPercentage < 0)
-            {
-                fanPercentage = 10000;
-            }
-        }
-    }
-
-    /// <summary>
     /// Update is called to update the graphic and textbox in the heads up display in Unity.
     /// </summary>
     public void Update()
     {
-        fan.fillAmount = (float)fanPercentage / 10000; //get fan value from listener, convert to a percentage (x/100)
-        //reduceFan(); //calls reduce fan function to show simple animation
-        text.text = fanPercentage + " "; //show the fan value as text in the display
+        fan.fillAmount = (float)fanRPM / 10000; //get fan value from listener, convert to a percentage (x/100)
+        text.text = fanRPM + " "; //show the fan value as text in the display
         changeColor(); //calls the change color function.
     }
 }

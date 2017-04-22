@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 
 /// <summary>
+/// Author: Allen Black, Kevin Do
 /// File: gForce.cs \n
 /// Date Last Modified: 3/29/2017 \n
 /// Description: GForce code to manage the GForce graphic. the program
@@ -48,8 +49,6 @@ public class gForce : MonoBehaviour
     private Text leftText;
     /// <value> Use for the acceleration text in Unity. </value>
     private Text accelText;
-    /// <value> Use to delay the loop of text animation. </value>
-    public static int count = 0;
     /// <value> Used to get image from Unity. </value>
     private RawImage gforceImage;
     /// <value> Used to set values of teh gForce. </value>
@@ -68,12 +67,12 @@ public class gForce : MonoBehaviour
 		gForceVal = gForceData[1];
     }
 
-	/// <summary>
+    /// <summary>
     /// This function calculates the x and y values for the gForce, then determines the brake, accelerataion, left, and right values.
     /// </summary>
-    /// <param name="gForceVal"></param>
-    /// <param name="theta"></param>
-	public void calculateGforce(float gForceVal, float theta)
+    /// <param name="gForceVal"> The gForce value from data generator. </param>
+    /// <param name="theta"> The theta value from data generator. </param>
+    public void calculateGforce(float gForceVal, float theta)
 	{
         float gForceX = gForceVal * (float)Math.Cos(theta);
         float gForceY = gForceVal * (float)Math.Sin(theta);
@@ -142,30 +141,12 @@ public class gForce : MonoBehaviour
         
         //if the gForce value is not 0, find the x and y value from the data generator.
         if (gForceVal != 0) {
-            xPos = gForceVal * (float)Math.Cos(theta) * 6.05f;
-            yPos = gForceVal * (float)Math.Sin(theta) * 6.05f;
+            xPos = gForceVal * (float)Math.Cos(theta) * 95f;
+            yPos = gForceVal * (float)Math.Sin(theta) * 95f;
         }
         
-
         gforceImage.transform.localPosition = new Vector3(xPos, yPos, 0);
 		calculateGforce(gForceVal, theta);
-        /*
-        // set dot in gForce to a random location with a radius of 4.
-		gforceImage.transform.localPosition = UnityEngine.Random.insideUnitCircle * 4;
-        
-        //decrease the value of the text for brake, right, left, and acceleration.
-        count++;
-        if (count == 20)
-        {
-            gForce1 = gForce1 - 5; //decrement the width of image
-            count = 0;
-            //reset battery to 100 when it gets to 0 (value doesnt go negative)
-            if (gForce1 == 0)
-            {
-                gForce1 = 100;
-            }
-        }
-        */
 
         //set values to textbox in Unity
         brakeText.text = gForce1.brake + "";

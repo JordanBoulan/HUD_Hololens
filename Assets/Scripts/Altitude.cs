@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
+/// Author: Grant Ikehara, Kevin Do
 /// File: Altitude.cs \n
 /// Date Last Modified: 2/26/2017 \n
 /// Description: Altitude code to manage the animation and text of the altitude graphic. The program 
@@ -43,34 +44,9 @@ public class Altitude : MonoBehaviour
         altitudeBar = GameObject.Find("AltitudeBarFill").GetComponent<Image>();
         altitudeBar.fillAmount = 0f;
         
-
         //find the altitude textbox in unity to display the numerical value of the user's height
         altitudeText = GameObject.Find("AltitudeText").GetComponent<Text>();
         altitudeText.text = "0.0";
-        //altitudeText.text = altitude.ToString();
-
-        //loop that will reduce the altitude value over time. comment out this line to use the data reciever above.
-        //InvokeRepeating("ReduceAltitude", 0f, 0.5f);
-        //SetAltitudeBar(altitude);
-        //altitudeText.text = altitude.ToString();
-    }
-
-    /// <summary>
-    /// A simple loop to show a simple animation of the altitude graphic
-    /// The function reduces the value airspeed over time. If the value is 0, it is reset to the max airspeed, 30.
-    /// The value of the airspeed is also sent to the text box to display the current value.  
-    /// 
-    /// This function is not used when getting data from the listener.
-    /// </summary>
-    private void ReduceAltitude()
-    {
-        altitudeBar.fillAmount = altitude / 10;
-        altitude -= 1f;
-        if (altitude < 0f)
-        {
-            altitude = 10f;
-        }
-        
     }
 
     /// <summary>

@@ -2,10 +2,11 @@
 using System.Collections;
 
 /// <summary>
+/// Author: Allen Black
 /// File: DataCleaner.cs \n
-/// Date Last Modified: 4/8/2017 \n
-/// Description: This program checks for any bad packets that were sent from the data generator in
-/// the Raspberry Pi. If a value outside its range is sent over, it will report it as a bad packet,
+/// Date Last Modified: 4/19/2017 \n
+/// Description: This program checks for any bad packets that were sent from the data generator in \n
+/// the Raspberry Pi. If a value outside its range is sent over, it will report it as a bad packet, \n
 /// and ignore the value.
 /// </summary>
 
@@ -16,7 +17,12 @@ public class DataCleaner : MonoBehaviour {
     public static int packetCounter = 0;
     /// <value> Use to count the number of bad packets (data out of range) from data generator. </value>
     private static int badPackets {get; set;}
-    
+
+    /// <value> Minimum battery value allowed (value cant be less than 0). </value>
+    private static int MIN_BATTERY = 0;
+    /// <value> Maximum battery value allowed (value cannot be greater than 100). </value>
+    private static int MAX_BATTERY = 100;
+
     /// <value> Minumum airspeed value allowed (value cant be less than 0). </value>
     private static int MIN_AIRSPEED = 0;
     /// <value> Maximum airspeed value allowed (value cant be greater than 30). </value>
@@ -32,15 +38,10 @@ public class DataCleaner : MonoBehaviour {
     /// <value> Maximum value for the Fan speed. </value>
     private static int MAX_FAN = 10000;
 
-    /// <value> Minimum battery value allowed (value cant be less than 0). </value>
-    private static int MIN_BATTERY = 0;
-    /// <value> Maximum battery vallue allowed (value cannot be greater than 100). </value>
-    private static int MAX_BATTERY = 100;
-
-    //<value> how far down the user can look. </value>
-    //private static int MIN_HEADING = -180;
-    //<value> how far up the user can look. </value>
-    //private static int MAX_HEADING = 180;
+    /// <value> Minimum temperature value allowed (value cant be less than 0). </value>
+    private static int MIN_TEMPERATURE = 0;
+    /// <value> Maximum temperature value allowed (value cannot be greater than 120). </value>
+    private static int MAX_TEMPERATURE = 120;
 
     /// <value> Minimum angle of the GForce. </value>
     private static int MIN_GFORCE_ANGLE = 0;
@@ -65,7 +66,13 @@ public class DataCleaner : MonoBehaviour {
         //gives error
         //if (packetCounter != newData.packetNumber)
         //    Warnings.setWarning("Packet(s) Lost: " + Connection.lostPackets);
-        
+
+        //check battery data
+        if ((newData.batteryData <= MIN_BATTERY) || (newData.batteryData >= MAX_BATTERY))
+        {
+            badPackets += 1;
+            return false;
+        }
         //check airspeed data
         if ((newData.speedData <= MIN_AIRSPEED) || (newData.speedData >= MAX_AIRSPEED))
         {
@@ -84,13 +91,12 @@ public class DataCleaner : MonoBehaviour {
             badPackets += 1;
             return false;
         }
-        //not needed?
-        //if ((newData.headingData <= MIN_HEADING) || (newData.headingData >= MAX_HEADING))
-        //{
-        //    badPackets += 1;
-        //    return false;
-        //}
-
+        //check temperature data
+        if ((newData.tempData <= MIN_TEMPERATURE) || (newData.tempData >= MAX_TEMPERATURE))
+        {
+            badPackets += 1;
+            return false;
+        }
         //check gforce angle data
         if ((newData.gforceData[0] <= MIN_GFORCE_ANGLE) || (newData.gforceData[0] >= MAX_GFORCE_ANGLE))
         {
