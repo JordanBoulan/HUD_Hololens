@@ -2,7 +2,6 @@ var class_battery =
 [
     [ "changeColor", "class_battery.html#a95565b986796d975d0e73753c1818d74", null ],
     [ "dataListener", "class_battery.html#a83a15f20014755c3e4feac48600f9106", null ],
-    [ "reduceBattery", "class_battery.html#a0eff89617c4c2963287a2361c2c446e3", null ],
     [ "Start", "class_battery.html#a7968e27a3803393d713326b57e070d23", null ],
     [ "Update", "class_battery.html#a8120356baf0d56b4adcbac32c9b26fa3", null ],
     [ "battery", "class_battery.html#a7e1a5fe9852911d9fb71d825f3b4498f", null ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mydataupdater',['myDataUpdater',['../class_altitude.html#afc8a197e78150ffd89f568fe22cca83d',1,'Altitude']]]
+  ['ondatarecieved',['onDataRecieved',['../class_udp_event.html#a90b37ccb58abcdab80aef5375e48e87d',1,'UdpEvent']]]
 ];

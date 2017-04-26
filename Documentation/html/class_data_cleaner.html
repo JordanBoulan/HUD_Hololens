@@ -91,9 +91,10 @@ $(document).ready(function(){initNavTree('class_data_cleaner.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>File: <a class="el" href="_data_cleaner_8cs.html">DataCleaner.cs</a> <br />
-Date Last Modified: 4/8/2017 <br />
-Description: This program checks for any bad packets that were sent from the data generator in the Raspberry Pi.  
+<p>Author: Allen Black File: <a class="el" href="_data_cleaner_8cs.html">DataCleaner.cs</a> <br />
+Date Last Modified: 4/19/2017 <br />
+Description: This program checks for any bad packets that were sent from the data generator in <br />
+the Raspberry Pi.  
  <a href="class_data_cleaner.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for DataCleaner:</div>
@@ -130,6 +131,12 @@ Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
+<tr class="memitem:a5c0ac67b0cdef21c897ce8e7f3dfecc0"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#a5c0ac67b0cdef21c897ce8e7f3dfecc0">MIN_BATTERY</a> = 0</td></tr>
+<tr class="memdesc:a5c0ac67b0cdef21c897ce8e7f3dfecc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum battery value allowed (value cant be less than 0).  <a href="#a5c0ac67b0cdef21c897ce8e7f3dfecc0">More...</a><br /></td></tr>
+<tr class="separator:a5c0ac67b0cdef21c897ce8e7f3dfecc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae258c811044683e8f996942239c475e4"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#ae258c811044683e8f996942239c475e4">MAX_BATTERY</a> = 100</td></tr>
+<tr class="memdesc:ae258c811044683e8f996942239c475e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum battery value allowed (value cannot be greater than 100).  <a href="#ae258c811044683e8f996942239c475e4">More...</a><br /></td></tr>
+<tr class="separator:ae258c811044683e8f996942239c475e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3878279ba284bcec815278df560acff"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#ac3878279ba284bcec815278df560acff">MIN_AIRSPEED</a> = 0</td></tr>
 <tr class="memdesc:ac3878279ba284bcec815278df560acff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minumum airspeed value allowed (value cant be less than 0).  <a href="#ac3878279ba284bcec815278df560acff">More...</a><br /></td></tr>
 <tr class="separator:ac3878279ba284bcec815278df560acff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,12 +155,12 @@ Static Private Attributes</h2></td></tr>
 <tr class="memitem:aaee5b783a9a90562fbdb54a073748279"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#aaee5b783a9a90562fbdb54a073748279">MAX_FAN</a> = 10000</td></tr>
 <tr class="memdesc:aaee5b783a9a90562fbdb54a073748279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value for the <a class="el" href="class_fan.html" title="File: Fan.cs  Date Last Modified: 3/15/2017  Description: Fan code to manage the fan graphic...">Fan</a> speed.  <a href="#aaee5b783a9a90562fbdb54a073748279">More...</a><br /></td></tr>
 <tr class="separator:aaee5b783a9a90562fbdb54a073748279"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c0ac67b0cdef21c897ce8e7f3dfecc0"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#a5c0ac67b0cdef21c897ce8e7f3dfecc0">MIN_BATTERY</a> = 0</td></tr>
-<tr class="memdesc:a5c0ac67b0cdef21c897ce8e7f3dfecc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum battery value allowed (value cant be less than 0).  <a href="#a5c0ac67b0cdef21c897ce8e7f3dfecc0">More...</a><br /></td></tr>
-<tr class="separator:a5c0ac67b0cdef21c897ce8e7f3dfecc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae258c811044683e8f996942239c475e4"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#ae258c811044683e8f996942239c475e4">MAX_BATTERY</a> = 100</td></tr>
-<tr class="memdesc:ae258c811044683e8f996942239c475e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum battery vallue allowed (value cannot be greater than 100).  <a href="#ae258c811044683e8f996942239c475e4">More...</a><br /></td></tr>
-<tr class="separator:ae258c811044683e8f996942239c475e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfd14cfb0ca80392a433084abdb26021"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#acfd14cfb0ca80392a433084abdb26021">MIN_TEMPERATURE</a> = 0</td></tr>
+<tr class="memdesc:acfd14cfb0ca80392a433084abdb26021"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum temperature value allowed (value cant be less than 0).  <a href="#acfd14cfb0ca80392a433084abdb26021">More...</a><br /></td></tr>
+<tr class="separator:acfd14cfb0ca80392a433084abdb26021"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f26433759f9936a041bac9937b6b284"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#a9f26433759f9936a041bac9937b6b284">MAX_TEMPERATURE</a> = 120</td></tr>
+<tr class="memdesc:a9f26433759f9936a041bac9937b6b284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum temperature value allowed (value cannot be greater than 120).  <a href="#a9f26433759f9936a041bac9937b6b284">More...</a><br /></td></tr>
+<tr class="separator:a9f26433759f9936a041bac9937b6b284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3bd9802f0a03472819b768a39a8c1d1"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_cleaner.html#ad3bd9802f0a03472819b768a39a8c1d1">MIN_GFORCE_ANGLE</a> = 0</td></tr>
 <tr class="memdesc:ad3bd9802f0a03472819b768a39a8c1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum angle of the GForce.  <a href="#ad3bd9802f0a03472819b768a39a8c1d1">More...</a><br /></td></tr>
 <tr class="separator:ad3bd9802f0a03472819b768a39a8c1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,10 +175,12 @@ Static Private Attributes</h2></td></tr>
 <tr class="separator:adb91c803ec27594f53d70843a531e250"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>File: <a class="el" href="_data_cleaner_8cs.html">DataCleaner.cs</a> <br />
-Date Last Modified: 4/8/2017 <br />
-Description: This program checks for any bad packets that were sent from the data generator in the Raspberry Pi. </p>
-<p>If a value outside its range is sent over, it will report it as a bad packet, and ignore the value. </p>
+<div class="textblock"><p>Author: Allen Black File: <a class="el" href="_data_cleaner_8cs.html">DataCleaner.cs</a> <br />
+Date Last Modified: 4/19/2017 <br />
+Description: This program checks for any bad packets that were sent from the data generator in <br />
+the Raspberry Pi. </p>
+<p>If a value outside its range is sent over, it will report it as a bad packet, <br />
+and ignore the value. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7b08eba17e14f398ee9d595866f492c3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b08eba17e14f398ee9d595866f492c3">&#9670;&nbsp;</a></span>checkDataValues()</h2>
@@ -306,7 +315,7 @@ Description: This program checks for any bad packets that were sent from the dat
 </table>
 </div><div class="memdoc">
 
-<p>Maximum battery vallue allowed (value cannot be greater than 100). </p>
+<p>Maximum battery value allowed (value cannot be greater than 100). </p>
 
 </div>
 </div>
@@ -379,6 +388,30 @@ Description: This program checks for any bad packets that were sent from the dat
 </div><div class="memdoc">
 
 <p>Maximum radius of the GForce. </p>
+
+</div>
+</div>
+<a id="a9f26433759f9936a041bac9937b6b284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f26433759f9936a041bac9937b6b284">&#9670;&nbsp;</a></span>MAX_TEMPERATURE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int DataCleaner.MAX_TEMPERATURE = 120</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum temperature value allowed (value cannot be greater than 120). </p>
 
 </div>
 </div>
@@ -526,6 +559,30 @@ Description: This program checks for any bad packets that were sent from the dat
 
 </div>
 </div>
+<a id="acfd14cfb0ca80392a433084abdb26021"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfd14cfb0ca80392a433084abdb26021">&#9670;&nbsp;</a></span>MIN_TEMPERATURE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int DataCleaner.MIN_TEMPERATURE = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Minimum temperature value allowed (value cant be less than 0). </p>
+
+</div>
+</div>
 <a id="ac9ca1a0335e2a41572e133bc7e78e6bd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9ca1a0335e2a41572e133bc7e78e6bd">&#9670;&nbsp;</a></span>packetCounter</h2>
 
@@ -584,7 +641,7 @@ Description: This program checks for any bad packets that were sent from the dat
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_data_cleaner.html">DataCleaner</a></li>
-    <li class="footer">Generated on Wed Apr 19 2017 15:22:41 for HUDforHololens by
+    <li class="footer">Generated on Mon Apr 24 2017 14:38:37 for HUDforHololens by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

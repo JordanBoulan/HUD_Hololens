@@ -74,8 +74,8 @@ public class gForce : MonoBehaviour
     /// <param name="theta"> The theta value from data generator. </param>
     public void calculateGforce(float gForceVal, float theta)
 	{
-        float gForceX = gForceVal * (float)Math.Cos(theta);
-        float gForceY = gForceVal * (float)Math.Sin(theta);
+        float gForceX = Math.Abs(gForceVal * (float)Math.Cos(theta));
+        float gForceY = Math.Abs(gForceVal * (float)Math.Sin(theta));
         //quadrant 1
         if (theta >= 0 && theta < 90)
 		{

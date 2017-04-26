@@ -1,7 +1,6 @@
 var class_airspeed =
 [
     [ "dataUpdater", "class_airspeed.html#a19e789a2ca2668e1be21d2f3d7ca0b4a", null ],
-    [ "ReduceAirspeed", "class_airspeed.html#a865cbdbf55eeee710e499959cdade3e8", null ],
     [ "Start", "class_airspeed.html#ab6fa5e94d6a823bd114762492703db7a", null ],
     [ "Update", "class_airspeed.html#a8c1545c6073d8fb71f1280991b41f805", null ],
     [ "airspeed", "class_airspeed.html#abf040dee278544fcfa5736e89d7d8686", null ],
