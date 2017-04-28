@@ -16,12 +16,13 @@ public class Heading : MonoBehaviour
     public GameObject compassCamera;
     /// <value> Will be assigned to the heading graphic object in Unity </value>
     public GameObject headingBlock;
-    /// <value> Z value on the x,y,z plane </value>
+    /// <value> Z value on the x,y,z plane as a euler angle</value>
     private float currentZ = 0.0f;
-    /// <value> X value on the x,y,z plane </value>
+    /// <value> X value on the x,y,z plane as a euler angle </value>
     private float currentX = 0.0f;
     /// <value> Will be assigned to the raw image object of the heading graphic </value>
     RawImage headingTexture;
+    
 
     /// <summary>
     /// Gets the camera and heading (middle of UI) object from Unity and assigns them to a variable.
@@ -33,10 +34,10 @@ public class Heading : MonoBehaviour
         //get heading graphic
         headingBlock = GameObject.Find("Heading");
         //get raw image object of the heading graphic
-        headingTexture =  headingBlock.GetComponent<RawImage>();
+        headingTexture = headingBlock.GetComponent<RawImage>();
         //uvrect.Position
-        
-        
+
+
     }
 
     /// <summary>
@@ -47,32 +48,43 @@ public class Heading : MonoBehaviour
     /// </summary>
     void Update()
     {
-        //set z component
+        //get z component 
         currentZ = compassCamera.transform.localRotation.eulerAngles.z;
-        //set x component
+        //get x component 
         currentX = compassCamera.transform.localRotation.eulerAngles.x;
-        //using euler angles to transform the graphic
-        headingBlock.transform.localRotation = Quaternion.Euler(headingBlock.transform.localRotation.eulerAngles.x, headingBlock.transform.localRotation.eulerAngles.y, -currentZ);
 
-        float newY = 0.414f;
-        if (currentX >= 180)
+
+        //using euler angles to transform the graphic
+        if (currentZ != 180 && currentZ != -180)
+            headingBlock.transform.localRotation = Quaternion.Euler(headingBlock.transform.localRotation.eulerAngles.x, headingBlock.transform.localRotation.eulerAngles.y, -currentZ);
+        float newY = 0.414f; //the offset for the center (Horizion Line)
+
+        if (currentX == 0)
         {
+            newY = 0.414f; // center
+        }
+
+        else if (currentX >= 180)
+        { 
             currentX = Mathf.Abs(currentX - 360);
-            newY = 0.414f + (currentX / 10.0f * 0.027f);
-  
+            newY = 0.414f + (currentX / 10.0f * 0.027f); //For Every 10 degrees the texture needs to be offset by 0.027
         }
 
         else if (currentX < 180)
         {
-            newY = 0.414f - (currentX / 10.0f * 0.027f);
+            newY = 0.414f - (currentX / 10.0f * 0.027f); 
         }
 
-        else if (currentX == 0)
+        Debug.Log(newY);
+
+        if (newY > 0.1908 && newY <= 0.6485) // keep between +- 85 degrees, due to euler angles
         {
-            newY = 0.414f;
+            Rect newUvRect = new Rect(1, newY, 1, 0.18f); // .18 Shows 5 lines (degree markers) in total
+            headingTexture.uvRect = newUvRect; // update the texture cordinates
         }
-        Rect newUvRect = new Rect(1, newY, 1, 0.18f);
-        headingTexture.uvRect = newUvRect;
 
     }
+
+
 }
+
