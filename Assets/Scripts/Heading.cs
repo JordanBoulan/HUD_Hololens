@@ -35,7 +35,7 @@ public class Heading : MonoBehaviour
         headingBlock = GameObject.Find("Heading");
         //get raw image object of the heading graphic
         headingTexture = headingBlock.GetComponent<RawImage>();
-        //uvrect.Position
+        
 
 
     }
@@ -55,9 +55,10 @@ public class Heading : MonoBehaviour
 
 
         //using euler angles to transform the graphic
-        if (currentZ != 180 && currentZ != -180)
+        if (currentZ < 90 || currentZ > 180) //prevent flipping of texture
             headingBlock.transform.localRotation = Quaternion.Euler(headingBlock.transform.localRotation.eulerAngles.x, headingBlock.transform.localRotation.eulerAngles.y, -currentZ);
-        float newY = 0.414f; //the offset for the center (Horizion Line)
+        
+		float newY = 0.414f; //the offset for the center (Horizion Line)
 
         if (currentX == 0)
         {
@@ -75,7 +76,6 @@ public class Heading : MonoBehaviour
             newY = 0.414f - (currentX / 10.0f * 0.027f); 
         }
 
-        Debug.Log(newY);
 
         if (newY > 0.1908 && newY <= 0.6485) // keep between +- 85 degrees, due to euler angles
         {
